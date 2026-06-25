@@ -6,8 +6,8 @@
 
 Auris listens to your microphone and system audio, transcribes the conversation on-device with macOS's native speech engine, and turns it into a clean, GPT-powered summary with action items. Bring your own OpenAI key. Open source.
 
-[![Platform](https://img.shields.io/badge/platform-macOS%2014%2B-blue)](https://www.apple.com/macos/)
-[![Swift](https://img.shields.io/badge/Swift-5.9-orange)](https://swift.org)
+[![Platform](https://img.shields.io/badge/platform-macOS%2026%2B-blue)](https://www.apple.com/macos/)
+[![Swift](https://img.shields.io/badge/Swift-6.3-orange)](https://swift.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](#contributing)
 
@@ -66,7 +66,9 @@ cd auris
 open Auris.xcodeproj
 ```
 
-Build & run with Xcode 15+.
+Build & run with Xcode 16+ (macOS 14+ deployment target). On first launch, set your signing
+team in **Signing & Capabilities** if codesigning fails. The UI is localized in **English,
+Portuguese (BR), and Spanish** — it follows your system language, with an override in Settings.
 
 ## Setup
 
@@ -104,7 +106,7 @@ Build & run with Xcode 15+.
 - [ ] Export (Markdown, PDF, `.srt`/`.vtt`)
 - [ ] Integrations (Notion, Slack, …)
 
-> **Note on diarization:** Apple's native speech engine transcribes but does **not** separate speakers. The MVP ships with *manual* speaker labeling; automatic diarization is on the roadmap.
+> **Note on diarization:** Apple's native speech engine transcribes but does **not** separate speakers. The MVP ships with _manual_ speaker labeling; automatic diarization is on the roadmap.
 
 ## Tech stack
 

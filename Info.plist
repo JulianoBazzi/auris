@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>pt-BR</string>
+		<string>es</string>
+	</array>
+	<key>LSMinimumSystemVersion</key>
+	<string>14.0</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Auris uses your microphone to record meetings. Audio is processed on your device.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Auris transcribes your meetings on-device using Apple's Speech framework.</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>© Juliano Bazzi. MIT License.</string>
+</dict>
+</plist>
