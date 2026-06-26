@@ -1,0 +1,17 @@
+# Secrets / environment
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+
+# Xcode user state
+*.xcuserstate
+xcuserdata/
+*.xcuserdatad/
+
+# Build
+build/
+DerivedData/
+*.xcarchive

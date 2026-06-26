@@ -105,7 +105,7 @@ final class TranscriptionService: NSObject, Transcribing, @unchecked Sendable {
             do {
                 for try await result in transcriber.results {
                     let text = String(result.text.characters)
-                    tlog.notice("result final=\(result.isFinal) text=\(text, privacy: .public)")
+                    tlog.notice("result final=\(result.isFinal) len=\(text.count, privacy: .public) text=\(text, privacy: .private)")
                     self.onSegment?(LiveSegment(text: text, startTime: self.segmentStart, isFinal: result.isFinal))
                     if result.isFinal {
                         self.segmentStart = self.offsetProvider?() ?? self.segmentStart
