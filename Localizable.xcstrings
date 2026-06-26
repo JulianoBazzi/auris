@@ -780,6 +780,28 @@
         }
       }
     },
+    "Generate summary": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generate summary"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generar resumen"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerar resumo"
+          }
+        }
+      }
+    },
     "Generated from the meeting transcript": {
       "localizations": {
         "en": {
@@ -1195,6 +1217,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nenhuma reunião ainda"
+          }
+        }
+      }
+    },
+    "No summary yet. Generate it from the transcript.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No summary yet. Generate it from the transcript."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay resumen. Genéralo a partir de la transcripción."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum resumo ainda. Gere a partir da transcrição."
           }
         }
       }

@@ -4,11 +4,16 @@ import AVFoundation
 struct SummaryView: View {
     let meeting: Meeting
 
+    @Environment(RecordingViewModel.self) private var recorder
+    @Environment(\.modelContext) private var context
+
     enum Tab { case summary, transcript }
     @State private var tab: Tab = .summary
     @State private var player: AVAudioPlayer?
     @State private var isPlaying = false
     @State private var currentTime: TimeInterval = 0
+    @State private var isGenerating = false
+    @State private var genError: String?
 
     private let ticker = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
 
@@ -140,11 +145,15 @@ struct SummaryView: View {
     private var summaryContent: some View {
         VStack(alignment: .leading, spacing: 26) {
             block(title: "Executive summary", icon: "doc.text") {
-                Text(meeting.executiveSummary ?? "—")
-                    .font(AurisFont.ui(14))
-                    .foregroundStyle(AurisColor.textSecondary)
-                    .lineSpacing(4)
-                    .fixedSize(horizontal: false, vertical: true)
+                if let text = meeting.executiveSummary {
+                    Text(text)
+                        .font(AurisFont.ui(14))
+                        .foregroundStyle(AurisColor.textSecondary)
+                        .lineSpacing(4)
+                        .fixedSize(horizontal: false, vertical: true)
+                } else {
+                    summaryEmptyState
+                }
             }
             if !meeting.topics.isEmpty {
                 block(title: "Key topics", icon: "list.bullet") {
@@ -161,6 +170,45 @@ struct SummaryView: View {
                 }
             }
         }
+    }
+
+    /// Shown when the meeting has no summary yet (e.g. the OpenAI call failed after recording).
+    private var summaryEmptyState: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("No summary yet. Generate it from the transcript.")
+                .font(AurisFont.ui(14))
+                .foregroundStyle(AurisColor.textMuted)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Button { Task { await generateSummary() } } label: {
+                HStack(spacing: 8) {
+                    if isGenerating {
+                        ProgressView().controlSize(.small).tint(.white)
+                        Text("Generating summary…")
+                    } else {
+                        Image(systemName: "sparkles").font(.system(size: 14, weight: .semibold))
+                        Text("Generate summary")
+                    }
+                }
+            }
+            .buttonStyle(GradientButtonStyle())
+            .disabled(isGenerating)
+
+            if let genError {
+                Text(genError)
+                    .font(AurisFont.ui(12))
+                    .foregroundStyle(AurisColor.danger)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+    }
+
+    private func generateSummary() async {
+        genError = nil
+        isGenerating = true
+        let ok = await recorder.regenerateSummary(for: meeting, context: context)
+        if !ok { genError = recorder.errorMessage }
+        isGenerating = false
     }
 
     private var transcriptContent: some View {

@@ -41,6 +41,8 @@ final class RecordingViewModel {
 
     /// Set when the OpenAI summary call fails — drives the "Falha ao gerar resumo" retry card.
     var summaryFailed = false
+    /// True while the detail-screen "Generate summary" action runs (does not touch `phase`).
+    var isRegenerating = false
     /// Set when system-audio (Screen Recording) capture was denied — drives the restart banner.
     var systemCaptureDenied = false
     /// True while the on-device speech model for the chosen language is downloading.
@@ -327,6 +329,42 @@ final class RecordingViewModel {
         }
         phase = .done
         SharedStore.updateRecent(from: context)
+    }
+
+    /// Regenerates the summary for an already-saved meeting (detail screen), without touching `phase`.
+    /// Reads attachment images from disk (not `pendingImages`) and uses the meeting's stored language.
+    /// Returns `true` on success; on failure sets `errorMessage` and returns `false`.
+    @discardableResult
+    func regenerateSummary(for meeting: Meeting, context: ModelContext) async -> Bool {
+        guard KeychainStore.hasKey, !meeting.segments.isEmpty else {
+            errorMessage = SummarizationError.missingKey.localizedDescription
+            return false
+        }
+        isRegenerating = true
+        defer { isRegenerating = false }
+
+        let transcript = meeting.segments
+            .sorted { $0.startTime < $1.startTime }
+            .map { "\($0.speakerName): \($0.text)" }
+            .joined(separator: "\n")
+        let images = meeting.attachments.compactMap {
+            try? Data(contentsOf: RecordingStore.attachmentURL(named: $0.fileName))
+        }
+        do {
+            let summary = try await summarizer.summarize(
+                transcript: transcript, imageData: images, language: meeting.summaryLanguage
+            )
+            meeting.executiveSummary = summary.executiveSummary
+            meeting.topics = summary.topics
+            meeting.actionItems = summary.actionItems
+            meeting.summaryModel = UserDefaults.standard.string(forKey: "auris.summaryModel") ?? "gpt-4o"
+            try? context.save()
+            SharedStore.updateRecent(from: context)
+            return true
+        } catch {
+            errorMessage = error.localizedDescription
+            return false
+        }
     }
 
     private func transcriptText() -> String {
