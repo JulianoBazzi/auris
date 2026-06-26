@@ -49,7 +49,7 @@ struct DetailPanel: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
                 Image("Glyph").resizable().scaledToFit().frame(width: 16, height: 16)
-                Text("GPT-4o").font(AurisFont.ui(13, .semibold)).foregroundStyle(AurisColor.textPrimary)
+                Text(meeting.summaryModel ?? "GPT-4o").font(AurisFont.ui(13, .semibold)).foregroundStyle(AurisColor.textPrimary)
             }
             Text(meeting.summaryLanguage.uppercased())
                 .font(AurisFont.mono(11)).foregroundStyle(AurisColor.textMuted)

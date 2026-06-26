@@ -15,6 +15,8 @@ final class Meeting {
     /// Language the summary was generated in (e.g. "pt-BR").
     var summaryLanguage: String
     var executiveSummary: String?
+    /// OpenAI model id used to generate the summary (e.g. "gpt-4o"). Nil if not summarized.
+    var summaryModel: String?
     var topics: [String]
     var actionItems: [String]
     /// Hex color used for the sidebar dot / tag accent.

@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 
 /// "Before we start recording" consent modal. (.pen: Screen · Consentimento)
 struct ConsentSheet: View {
@@ -49,7 +50,10 @@ struct ConsentSheet: View {
                 }
                 .buttonStyle(.plain)
 
-                Button { onResult(true) } label: {
+                Button {
+                    if playNotice { NSSound(named: "Glass")?.play() }
+                    onResult(true)
+                } label: {
                     Text("Start recording")
                 }
                 .buttonStyle(GradientButtonStyle(verticalPadding: 9))

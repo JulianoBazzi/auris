@@ -58,6 +58,6 @@ struct RootView: View {
         .background(AurisColor.bgWindow)
         .environment(\.locale, appState.localeOverride ?? Locale.current)
         .id(appState.interfaceLanguage)
-        .onAppear { LibraryViewModel.seedIfNeeded(context) }
+        .onAppear { LibraryViewModel.removeSeedData(context) }
     }
 }

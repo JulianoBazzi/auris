@@ -6,55 +6,97 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EE61B50B7627D51B5401D8DD /* AurisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE67FC9CC92B8CA5E4A2090 /* AurisApp.swift */; };
-		A8D405D92419AA8F5A434A7A /* Chip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EC534E45F546342F959D05 /* Chip.swift */; };
-		3847705D486F2340783B6C03 /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D0776BAD7EF01D78DD66E /* ControlButton.swift */; };
-		A5313A47EC72682D5E25BDB2 /* SidebarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57947725D155BFC37A2E4C7B /* SidebarItem.swift */; };
-		D5C35431FA1320C88EC755B5 /* TitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD8CFDD656F55DD2D0B04A /* TitleBar.swift */; };
-		95633BA553D3BC32647BF4AA /* TranscriptRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC3F62387FD22459CD04E86 /* TranscriptRow.swift */; };
-		E82B2189904EB97DA2814852 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0E1B9EC28BC46833199B4 /* Theme.swift */; };
-		19FCBADF8B08C747741AF28B /* IdleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A3E7745F13D95BBCD13892 /* IdleView.swift */; };
-		1E4E296EC85418A3A0569CBF /* RootSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B4084D2753D27740E745C8 /* RootSplitView.swift */; };
-		D96B8DEF90B322749B195A6D /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6EE59AD8C5E911B1D3CF71 /* SidebarView.swift */; };
-		C455EB1E9FE71DA79F81F2A6 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E204FAE1A8CFD7BA5604DDD /* MenuBarView.swift */; };
-		5EC547431E0A74A56DC9E268 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6076E6DFBC6930AA670C8C9 /* OnboardingView.swift */; };
-		131E0D8B05817C4B95D77959 /* ConsentSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9D62E575407E9C8395B71C /* ConsentSheet.swift */; };
-		79B133DE3E381F57EA8AF758 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60A68A0849885CD92FB5F6 /* RecordingView.swift */; };
-		5B2BA378128175D0E0CBE1EC /* SpeakerNamingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD46358D8FD91924AF431F /* SpeakerNamingSheet.swift */; };
-		0C9ED96522263E04F6352FE6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4599AA9375712E54A80C71 /* SettingsView.swift */; };
-		D3DD916F46667A4D1F7DED46 /* DetailPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE3E67E3E0B6A0737564AB /* DetailPanel.swift */; };
-		6B0F9AD73BCD2E0342006718 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BBC406EB5DA4CD0197A0D8 /* SummaryView.swift */; };
-		885409AC0FFB652023218673 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0278F9F51BE3DBFBE76B4 /* Attachment.swift */; };
-		F8F137C53C11C87A14B728CC /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F7B52DF931332AAC1D61C /* Meeting.swift */; };
-		27A3CFF01185AEF73AB8B51F /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D883F8DE8C130E39B477E50 /* Speaker.swift */; };
-		F9E88E1C6625C6634F7CC75A /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2997A437BF4EC5D4A67318EC /* Tag.swift */; };
-		286445A7431AF028004D6E6B /* TranscriptSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BED3EA0899063EF3918AA7 /* TranscriptSegment.swift */; };
-		47AE5B7D4A20E9CF5A4F82EF /* AudioCaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D92741D3F240B38EE057C6 /* AudioCaptureService.swift */; };
-		02E2DBAC5AABEB1FB2B7B995 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC029ACA82DADF7F3FE1C6 /* KeychainStore.swift */; };
-		EED03BFFBD2F7A0635F7D69A /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E3773B3239B41A880D8D9 /* RecordingStore.swift */; };
-		CA8E05F8466FF289F6BCE710 /* SummarizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C3931810A4F8C3754C9A7E /* SummarizationService.swift */; };
-		72977BFD1AD2C16924A0A8BA /* TranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93786700DC840E2936FD5AAD /* TranscriptionService.swift */; };
-		DF932A30CD5A54BB21FFC035 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1387BA268FBA995ABFC64C /* AppState.swift */; };
-		7D3389E1DEB60EAE26F1488C /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3211C66C79E88AE23B627C6B /* LibraryViewModel.swift */; };
-		4809E6194D7FD970F1E1957C /* RecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A9D9FB3CA84319568CBB62 /* RecordingViewModel.swift */; };
-		B8AC1D188E57AAA305899A40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B04B2273026590A440D27C9 /* Assets.xcassets */; };
-		C6D30E225BCD511455FFAC06 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1D0D1BEDF1A3D6E5DD573FEF /* Localizable.xcstrings */; };
+		59537261840BA702BCA235A9 /* AurisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE67FC9CC92B8CA5E4A2090 /* AurisApp.swift */; };
+		6F883C73CD1B9601604B2005 /* Chip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EC534E45F546342F959D05 /* Chip.swift */; };
+		0D82D5861B3CA92AD5DFD22A /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D0776BAD7EF01D78DD66E /* ControlButton.swift */; };
+		372188BB025FC995C5CEED41 /* SidebarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57947725D155BFC37A2E4C7B /* SidebarItem.swift */; };
+		B02B6713EE1E99FF70E6C46C /* StatusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4D937526EA647F8D4EEE36 /* StatusCard.swift */; };
+		6909BC48A8AC3EB845452BF4 /* TitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD8CFDD656F55DD2D0B04A /* TitleBar.swift */; };
+		3E4BF2CB575DBDB5F9900540 /* TranscriptRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC3F62387FD22459CD04E86 /* TranscriptRow.swift */; };
+		AB497063267163E67B1DC16F /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0E1B9EC28BC46833199B4 /* Theme.swift */; };
+		5E2C10EAFF9C7DD25196BC35 /* IdleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A3E7745F13D95BBCD13892 /* IdleView.swift */; };
+		C90F332EDA728681EDC53196 /* DeleteMeetingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A6ECD474F77F099D5106EA /* DeleteMeetingSheet.swift */; };
+		29447BACC12EA465546FBC0C /* RootSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B4084D2753D27740E745C8 /* RootSplitView.swift */; };
+		C3DD3286196847C9825192DF /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6EE59AD8C5E911B1D3CF71 /* SidebarView.swift */; };
+		E7FCD1F5751B7330553B4889 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E204FAE1A8CFD7BA5604DDD /* MenuBarView.swift */; };
+		D16DEAC5B1BDB1268D4EC39E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6076E6DFBC6930AA670C8C9 /* OnboardingView.swift */; };
+		4B6D9AA26C9DC6FC8123F04C /* AISuggestionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB1C3BF0F0DDDA740C659DC /* AISuggestionsSheet.swift */; };
+		15214DD7AA827EFF9AA10A0C /* ConsentSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9D62E575407E9C8395B71C /* ConsentSheet.swift */; };
+		84B2C53F99550F3D0BF4AF56 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60A68A0849885CD92FB5F6 /* RecordingView.swift */; };
+		8CE077AFC7FCED38DC037458 /* SpeakerNamingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD46358D8FD91924AF431F /* SpeakerNamingSheet.swift */; };
+		A08E65DEE8501616FDB8018F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4599AA9375712E54A80C71 /* SettingsView.swift */; };
+		17F96F452BBB744876B72B6D /* DetailPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE3E67E3E0B6A0737564AB /* DetailPanel.swift */; };
+		A794F233493162D1BE2616A7 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BBC406EB5DA4CD0197A0D8 /* SummaryView.swift */; };
+		6EB019414FC1882B2D77A5D8 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0278F9F51BE3DBFBE76B4 /* Attachment.swift */; };
+		5EC25310B2A9C1CB7DD32F4C /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F7B52DF931332AAC1D61C /* Meeting.swift */; };
+		921E527D1C9C1A13D02B1B2E /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D883F8DE8C130E39B477E50 /* Speaker.swift */; };
+		B30AE8786F36EEE2D6B8EBBA /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2997A437BF4EC5D4A67318EC /* Tag.swift */; };
+		8E549648A381F9955A46E54B /* TranscriptSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BED3EA0899063EF3918AA7 /* TranscriptSegment.swift */; };
+		D541351A686BDC08DB43528C /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A653FA3E8BFDCC73AA92AA85 /* AppGroup.swift */; };
+		EAD55DB20A5E62EC7C127243 /* AppRelaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0483E0CD4646D0D4A109AB3B /* AppRelaunch.swift */; };
+		B9F3C1E97A7428A66338C393 /* AudioCaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D92741D3F240B38EE057C6 /* AudioCaptureService.swift */; };
+		67DA1ABEC35CE34D62B3767C /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC029ACA82DADF7F3FE1C6 /* KeychainStore.swift */; };
+		E6B4FBA2E0F95C5DD9C8720B /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E3773B3239B41A880D8D9 /* RecordingStore.swift */; };
+		C795EBE236AA36BBA66965DF /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C260A9348DE8438174C9E /* SharedStore.swift */; };
+		C353C14BE53811667EA0397B /* SummarizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C3931810A4F8C3754C9A7E /* SummarizationService.swift */; };
+		430EF8EAA1DB99079D663A1F /* TranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93786700DC840E2936FD5AAD /* TranscriptionService.swift */; };
+		A71686B63B66424F11590E4E /* UsageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC72B020E410FED982BB02E5 /* UsageStore.swift */; };
+		123CB9F4092A1B1E92BA1B14 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F770060ABFE1BFF6C43838 /* WidgetSnapshot.swift */; };
+		844CCB0045D47016CD9DE18B /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1387BA268FBA995ABFC64C /* AppState.swift */; };
+		AC6CB76E90A2D32F20F31799 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3211C66C79E88AE23B627C6B /* LibraryViewModel.swift */; };
+		FB3DEE59448E0CC1E6A7B0AE /* RecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A9D9FB3CA84319568CBB62 /* RecordingViewModel.swift */; };
+		2347D7988F701F2E82D26C2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B04B2273026590A440D27C9 /* Assets.xcassets */; };
+		DEFC60AB8641442656B4A670 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1D0D1BEDF1A3D6E5DD573FEF /* Localizable.xcstrings */; };
+		9F69B890EA671E93C5639476 /* AurisWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D9EFEB6B7544C89D281C5 /* AurisWidget.swift */; };
+		6BAC5FC6194E75421541FD07 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0E1B9EC28BC46833199B4 /* Theme.swift */; };
+		8EE85A9A707552E1334343D8 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A653FA3E8BFDCC73AA92AA85 /* AppGroup.swift */; };
+		6EE681427DB7D8B1B6EA7526 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F770060ABFE1BFF6C43838 /* WidgetSnapshot.swift */; };
+		C1CE97119249A1F47494E3DA /* AurisWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 16E753E2B59F1D242D278C57 /* AurisWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8701BB2B02FE1CE5DDDD47A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 789A660F13B02BB5FF122671;
+			remoteInfo = AurisWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5BA2DE8089FD1B011F522833 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C1CE97119249A1F47494E3DA /* AurisWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4F5E0F02997B67B141C09824 /* Auris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Auris.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		16E753E2B59F1D242D278C57 /* AurisWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AurisWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE67FC9CC92B8CA5E4A2090 /* AurisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AurisApp.swift"; sourceTree = "<group>"; };
+		204D9EFEB6B7544C89D281C5 /* AurisWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AurisWidget.swift"; sourceTree = "<group>"; };
 		F2EC534E45F546342F959D05 /* Chip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chip.swift"; sourceTree = "<group>"; };
 		212D0776BAD7EF01D78DD66E /* ControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlButton.swift"; sourceTree = "<group>"; };
 		57947725D155BFC37A2E4C7B /* SidebarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarItem.swift"; sourceTree = "<group>"; };
+		8E4D937526EA647F8D4EEE36 /* StatusCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusCard.swift"; sourceTree = "<group>"; };
 		1EFD8CFDD656F55DD2D0B04A /* TitleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitleBar.swift"; sourceTree = "<group>"; };
 		FBC3F62387FD22459CD04E86 /* TranscriptRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranscriptRow.swift"; sourceTree = "<group>"; };
 		0CD0E1B9EC28BC46833199B4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme.swift"; sourceTree = "<group>"; };
 		B9A3E7745F13D95BBCD13892 /* IdleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdleView.swift"; sourceTree = "<group>"; };
+		D1A6ECD474F77F099D5106EA /* DeleteMeetingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeleteMeetingSheet.swift"; sourceTree = "<group>"; };
 		00B4084D2753D27740E745C8 /* RootSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootSplitView.swift"; sourceTree = "<group>"; };
 		5D6EE59AD8C5E911B1D3CF71 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarView.swift"; sourceTree = "<group>"; };
 		3E204FAE1A8CFD7BA5604DDD /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuBarView.swift"; sourceTree = "<group>"; };
 		E6076E6DFBC6930AA670C8C9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingView.swift"; sourceTree = "<group>"; };
+		0BB1C3BF0F0DDDA740C659DC /* AISuggestionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AISuggestionsSheet.swift"; sourceTree = "<group>"; };
 		4E9D62E575407E9C8395B71C /* ConsentSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConsentSheet.swift"; sourceTree = "<group>"; };
 		4A60A68A0849885CD92FB5F6 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordingView.swift"; sourceTree = "<group>"; };
 		37FD46358D8FD91924AF431F /* SpeakerNamingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpeakerNamingSheet.swift"; sourceTree = "<group>"; };
@@ -66,11 +108,16 @@
 		0D883F8DE8C130E39B477E50 /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Speaker.swift"; sourceTree = "<group>"; };
 		2997A437BF4EC5D4A67318EC /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag.swift"; sourceTree = "<group>"; };
 		48BED3EA0899063EF3918AA7 /* TranscriptSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranscriptSegment.swift"; sourceTree = "<group>"; };
+		A653FA3E8BFDCC73AA92AA85 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppGroup.swift"; sourceTree = "<group>"; };
+		0483E0CD4646D0D4A109AB3B /* AppRelaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppRelaunch.swift"; sourceTree = "<group>"; };
 		04D92741D3F240B38EE057C6 /* AudioCaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioCaptureService.swift"; sourceTree = "<group>"; };
 		7FAC029ACA82DADF7F3FE1C6 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainStore.swift"; sourceTree = "<group>"; };
 		630E3773B3239B41A880D8D9 /* RecordingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordingStore.swift"; sourceTree = "<group>"; };
+		727C260A9348DE8438174C9E /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedStore.swift"; sourceTree = "<group>"; };
 		C1C3931810A4F8C3754C9A7E /* SummarizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SummarizationService.swift"; sourceTree = "<group>"; };
 		93786700DC840E2936FD5AAD /* TranscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranscriptionService.swift"; sourceTree = "<group>"; };
+		EC72B020E410FED982BB02E5 /* UsageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsageStore.swift"; sourceTree = "<group>"; };
+		36F770060ABFE1BFF6C43838 /* WidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WidgetSnapshot.swift"; sourceTree = "<group>"; };
 		9E1387BA268FBA995ABFC64C /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppState.swift"; sourceTree = "<group>"; };
 		3211C66C79E88AE23B627C6B /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryViewModel.swift"; sourceTree = "<group>"; };
 		30A9D9FB3CA84319568CBB62 /* RecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordingViewModel.swift"; sourceTree = "<group>"; };
@@ -78,10 +125,21 @@
 		1D0D1BEDF1A3D6E5DD573FEF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = "Localizable.xcstrings"; sourceTree = "<group>"; };
 		1507F021100E808DBE2FAA00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
 		DF7AE9F924D0E6FEE5C53529 /* Auris.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Auris.entitlements"; sourceTree = "<group>"; };
+		7550037AC7F18DC7870DCF72 /* Auris-Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Auris-Debug.entitlements"; sourceTree = "<group>"; };
+		1A23D9697CE4D09E1806A018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
+		FAD07A97D14D5808495B62C7 /* AurisWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AurisWidget.entitlements"; sourceTree = "<group>"; };
+		86D184914FB235CEE37CB96B /* AurisWidget-Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AurisWidget-Debug.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CF5BDB0BEAFE176F9629192A /* Frameworks */ = {
+		00902D9DB823B3227B76DC9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CB65C798F66BFAE6E959035 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -95,10 +153,12 @@
 			isa = PBXGroup;
 			children = (
 				5B04B2273026590A440D27C9 /* Assets.xcassets */,
+				7550037AC7F18DC7870DCF72 /* Auris-Debug.entitlements */,
 				DF7AE9F924D0E6FEE5C53529 /* Auris.entitlements */,
 				8BE67FC9CC92B8CA5E4A2090 /* AurisApp.swift */,
 				1507F021100E808DBE2FAA00 /* Info.plist */,
 				1D0D1BEDF1A3D6E5DD573FEF /* Localizable.xcstrings */,
+				2DC1C89DF0997540BB489831 /* AurisWidget */,
 				71386A41BF3705D552A88919 /* DesignSystem */,
 				C6D71DA7B22D387867F1A39F /* Features */,
 				01DF8015EE6D9F0C332DD0E1 /* Models */,
@@ -112,8 +172,20 @@
 			isa = PBXGroup;
 			children = (
 				4F5E0F02997B67B141C09824 /* Auris.app */,
+				16E753E2B59F1D242D278C57 /* AurisWidget.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2DC1C89DF0997540BB489831 /* AurisWidget */ = {
+			isa = PBXGroup;
+			children = (
+				86D184914FB235CEE37CB96B /* AurisWidget-Debug.entitlements */,
+				FAD07A97D14D5808495B62C7 /* AurisWidget.entitlements */,
+				204D9EFEB6B7544C89D281C5 /* AurisWidget.swift */,
+				1A23D9697CE4D09E1806A018 /* Info.plist */,
+			);
+			path = "AurisWidget";
 			sourceTree = "<group>";
 		};
 		71386A41BF3705D552A88919 /* DesignSystem */ = {
@@ -131,6 +203,7 @@
 				F2EC534E45F546342F959D05 /* Chip.swift */,
 				212D0776BAD7EF01D78DD66E /* ControlButton.swift */,
 				57947725D155BFC37A2E4C7B /* SidebarItem.swift */,
+				8E4D937526EA647F8D4EEE36 /* StatusCard.swift */,
 				1EFD8CFDD656F55DD2D0B04A /* TitleBar.swift */,
 				FBC3F62387FD22459CD04E86 /* TranscriptRow.swift */,
 			);
@@ -162,6 +235,7 @@
 		E6D5D3DA7029623924C5038B /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				D1A6ECD474F77F099D5106EA /* DeleteMeetingSheet.swift */,
 				00B4084D2753D27740E745C8 /* RootSplitView.swift */,
 				5D6EE59AD8C5E911B1D3CF71 /* SidebarView.swift */,
 			);
@@ -187,6 +261,7 @@
 		06B00F2EBA66925A94CE0772 /* Recording */ = {
 			isa = PBXGroup;
 			children = (
+				0BB1C3BF0F0DDDA740C659DC /* AISuggestionsSheet.swift */,
 				4E9D62E575407E9C8395B71C /* ConsentSheet.swift */,
 				4A60A68A0849885CD92FB5F6 /* RecordingView.swift */,
 				37FD46358D8FD91924AF431F /* SpeakerNamingSheet.swift */,
@@ -226,11 +301,16 @@
 		5B946EAFAAE425F193DB993E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A653FA3E8BFDCC73AA92AA85 /* AppGroup.swift */,
+				0483E0CD4646D0D4A109AB3B /* AppRelaunch.swift */,
 				04D92741D3F240B38EE057C6 /* AudioCaptureService.swift */,
 				7FAC029ACA82DADF7F3FE1C6 /* KeychainStore.swift */,
 				630E3773B3239B41A880D8D9 /* RecordingStore.swift */,
+				727C260A9348DE8438174C9E /* SharedStore.swift */,
 				C1C3931810A4F8C3754C9A7E /* SummarizationService.swift */,
 				93786700DC840E2936FD5AAD /* TranscriptionService.swift */,
+				EC72B020E410FED982BB02E5 /* UsageStore.swift */,
+				36F770060ABFE1BFF6C43838 /* WidgetSnapshot.swift */,
 			);
 			path = "Services";
 			sourceTree = "<group>";
@@ -250,20 +330,39 @@
 /* Begin PBXNativeTarget section */
 		16096466A0C94E7EBDCD0656 /* Auris */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CA4F39FAAB29E3FDC0219096 /* Build configuration list for PBXNativeTarget "Auris" */;
+			buildConfigurationList = 23746EFE221170E24101FE05 /* Build configuration list for PBXNativeTarget "Auris" */;
 			buildPhases = (
-				1CDF2F71A52B082132B04DFF /* Sources */,
-				CF5BDB0BEAFE176F9629192A /* Frameworks */,
-				C02F1309AF4906C92F1EAD44 /* Resources */,
+				7EC6D9E6268A1DE72A5C6080 /* Sources */,
+				00902D9DB823B3227B76DC9A /* Frameworks */,
+				3AF33F3745E98800474FFF1C /* Resources */,
+				5BA2DE8089FD1B011F522833 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DD93A878C708525D13DF0232 /* PBXTargetDependency */,
 			);
 			name = Auris;
 			productName = Auris;
 			productReference = 4F5E0F02997B67B141C09824 /* Auris.app */;
 			productType = "com.apple.product-type.application";
+		};
+		789A660F13B02BB5FF122671 /* AurisWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9CCA196484B5464F17B9BF6F /* Build configuration list for PBXNativeTarget "AurisWidget" */;
+			buildPhases = (
+				11176E48486D0B5EBE018FEC /* Sources */,
+				4CB65C798F66BFAE6E959035 /* Frameworks */,
+				81F6C604381829B4C0F7624D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AurisWidget;
+			productName = AurisWidget;
+			productReference = 16E753E2B59F1D242D278C57 /* AurisWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -275,9 +374,8 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					16096466A0C94E7EBDCD0656 = {
-						CreatedOnToolsVersion = 16.0;
-					};
+					16096466A0C94E7EBDCD0656 = {CreatedOnToolsVersion = 16.0; };
+					789A660F13B02BB5FF122671 = {CreatedOnToolsVersion = 16.0; };
 				};
 			};
 			buildConfigurationList = B0D3B7D22269663DD77FCD84 /* Build configuration list for PBXProject "Auris" */;
@@ -296,62 +394,97 @@
 			projectRoot = "";
 			targets = (
 				16096466A0C94E7EBDCD0656 /* Auris */,
+				789A660F13B02BB5FF122671 /* AurisWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C02F1309AF4906C92F1EAD44 /* Resources */ = {
+		3AF33F3745E98800474FFF1C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8AC1D188E57AAA305899A40 /* Assets.xcassets in Resources */,
-				C6D30E225BCD511455FFAC06 /* Localizable.xcstrings in Resources */,
+				2347D7988F701F2E82D26C2A /* Assets.xcassets in Resources */,
+				DEFC60AB8641442656B4A670 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81F6C604381829B4C0F7624D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1CDF2F71A52B082132B04DFF /* Sources */ = {
+		7EC6D9E6268A1DE72A5C6080 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE61B50B7627D51B5401D8DD /* AurisApp.swift in Sources */,
-				A8D405D92419AA8F5A434A7A /* Chip.swift in Sources */,
-				3847705D486F2340783B6C03 /* ControlButton.swift in Sources */,
-				A5313A47EC72682D5E25BDB2 /* SidebarItem.swift in Sources */,
-				D5C35431FA1320C88EC755B5 /* TitleBar.swift in Sources */,
-				95633BA553D3BC32647BF4AA /* TranscriptRow.swift in Sources */,
-				E82B2189904EB97DA2814852 /* Theme.swift in Sources */,
-				19FCBADF8B08C747741AF28B /* IdleView.swift in Sources */,
-				1E4E296EC85418A3A0569CBF /* RootSplitView.swift in Sources */,
-				D96B8DEF90B322749B195A6D /* SidebarView.swift in Sources */,
-				C455EB1E9FE71DA79F81F2A6 /* MenuBarView.swift in Sources */,
-				5EC547431E0A74A56DC9E268 /* OnboardingView.swift in Sources */,
-				131E0D8B05817C4B95D77959 /* ConsentSheet.swift in Sources */,
-				79B133DE3E381F57EA8AF758 /* RecordingView.swift in Sources */,
-				5B2BA378128175D0E0CBE1EC /* SpeakerNamingSheet.swift in Sources */,
-				0C9ED96522263E04F6352FE6 /* SettingsView.swift in Sources */,
-				D3DD916F46667A4D1F7DED46 /* DetailPanel.swift in Sources */,
-				6B0F9AD73BCD2E0342006718 /* SummaryView.swift in Sources */,
-				885409AC0FFB652023218673 /* Attachment.swift in Sources */,
-				F8F137C53C11C87A14B728CC /* Meeting.swift in Sources */,
-				27A3CFF01185AEF73AB8B51F /* Speaker.swift in Sources */,
-				F9E88E1C6625C6634F7CC75A /* Tag.swift in Sources */,
-				286445A7431AF028004D6E6B /* TranscriptSegment.swift in Sources */,
-				47AE5B7D4A20E9CF5A4F82EF /* AudioCaptureService.swift in Sources */,
-				02E2DBAC5AABEB1FB2B7B995 /* KeychainStore.swift in Sources */,
-				EED03BFFBD2F7A0635F7D69A /* RecordingStore.swift in Sources */,
-				CA8E05F8466FF289F6BCE710 /* SummarizationService.swift in Sources */,
-				72977BFD1AD2C16924A0A8BA /* TranscriptionService.swift in Sources */,
-				DF932A30CD5A54BB21FFC035 /* AppState.swift in Sources */,
-				7D3389E1DEB60EAE26F1488C /* LibraryViewModel.swift in Sources */,
-				4809E6194D7FD970F1E1957C /* RecordingViewModel.swift in Sources */,
+				59537261840BA702BCA235A9 /* AurisApp.swift in Sources */,
+				6F883C73CD1B9601604B2005 /* Chip.swift in Sources */,
+				0D82D5861B3CA92AD5DFD22A /* ControlButton.swift in Sources */,
+				372188BB025FC995C5CEED41 /* SidebarItem.swift in Sources */,
+				B02B6713EE1E99FF70E6C46C /* StatusCard.swift in Sources */,
+				6909BC48A8AC3EB845452BF4 /* TitleBar.swift in Sources */,
+				3E4BF2CB575DBDB5F9900540 /* TranscriptRow.swift in Sources */,
+				AB497063267163E67B1DC16F /* Theme.swift in Sources */,
+				5E2C10EAFF9C7DD25196BC35 /* IdleView.swift in Sources */,
+				C90F332EDA728681EDC53196 /* DeleteMeetingSheet.swift in Sources */,
+				29447BACC12EA465546FBC0C /* RootSplitView.swift in Sources */,
+				C3DD3286196847C9825192DF /* SidebarView.swift in Sources */,
+				E7FCD1F5751B7330553B4889 /* MenuBarView.swift in Sources */,
+				D16DEAC5B1BDB1268D4EC39E /* OnboardingView.swift in Sources */,
+				4B6D9AA26C9DC6FC8123F04C /* AISuggestionsSheet.swift in Sources */,
+				15214DD7AA827EFF9AA10A0C /* ConsentSheet.swift in Sources */,
+				84B2C53F99550F3D0BF4AF56 /* RecordingView.swift in Sources */,
+				8CE077AFC7FCED38DC037458 /* SpeakerNamingSheet.swift in Sources */,
+				A08E65DEE8501616FDB8018F /* SettingsView.swift in Sources */,
+				17F96F452BBB744876B72B6D /* DetailPanel.swift in Sources */,
+				A794F233493162D1BE2616A7 /* SummaryView.swift in Sources */,
+				6EB019414FC1882B2D77A5D8 /* Attachment.swift in Sources */,
+				5EC25310B2A9C1CB7DD32F4C /* Meeting.swift in Sources */,
+				921E527D1C9C1A13D02B1B2E /* Speaker.swift in Sources */,
+				B30AE8786F36EEE2D6B8EBBA /* Tag.swift in Sources */,
+				8E549648A381F9955A46E54B /* TranscriptSegment.swift in Sources */,
+				D541351A686BDC08DB43528C /* AppGroup.swift in Sources */,
+				EAD55DB20A5E62EC7C127243 /* AppRelaunch.swift in Sources */,
+				B9F3C1E97A7428A66338C393 /* AudioCaptureService.swift in Sources */,
+				67DA1ABEC35CE34D62B3767C /* KeychainStore.swift in Sources */,
+				E6B4FBA2E0F95C5DD9C8720B /* RecordingStore.swift in Sources */,
+				C795EBE236AA36BBA66965DF /* SharedStore.swift in Sources */,
+				C353C14BE53811667EA0397B /* SummarizationService.swift in Sources */,
+				430EF8EAA1DB99079D663A1F /* TranscriptionService.swift in Sources */,
+				A71686B63B66424F11590E4E /* UsageStore.swift in Sources */,
+				123CB9F4092A1B1E92BA1B14 /* WidgetSnapshot.swift in Sources */,
+				844CCB0045D47016CD9DE18B /* AppState.swift in Sources */,
+				AC6CB76E90A2D32F20F31799 /* LibraryViewModel.swift in Sources */,
+				FB3DEE59448E0CC1E6A7B0AE /* RecordingViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11176E48486D0B5EBE018FEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F69B890EA671E93C5639476 /* AurisWidget.swift in Sources */,
+				6BAC5FC6194E75421541FD07 /* Theme.swift in Sources */,
+				8EE85A9A707552E1334343D8 /* AppGroup.swift in Sources */,
+				6EE681427DB7D8B1B6EA7526 /* WidgetSnapshot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DD93A878C708525D13DF0232 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 789A660F13B02BB5FF122671 /* AurisWidget */;
+			targetProxy = 8701BB2B02FE1CE5DDDD47A4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		51EA85164D3D491DE58D80BC /* Debug */ = {
@@ -389,18 +522,19 @@
 			};
 			name = Release;
 		};
-		092AF95CB55BE40AED25F70D /* Debug */ = {
+		296606123BC51EF2B3893761 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5WQ3XSS9MT;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -413,18 +547,19 @@
 			};
 			name = Debug;
 		};
-		A2931430985F6734DC47E558 /* Release */ = {
+		D1D2CC000E421B32B804B657 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5WQ3XSS9MT;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -434,6 +569,52 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				CODE_SIGN_ENTITLEMENTS = Auris.entitlements;
+			};
+			name = Release;
+		};
+		621126193A17D245A66D9D22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5WQ3XSS9MT;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "AurisWidget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bazzi.auris.AurisWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				CODE_SIGN_ENTITLEMENTS = "AurisWidget/AurisWidget-Debug.entitlements";
+			};
+			name = Debug;
+		};
+		691C620FA5A998553FD0BDC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5WQ3XSS9MT;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "AurisWidget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bazzi.auris.AurisWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				CODE_SIGN_ENTITLEMENTS = "AurisWidget/AurisWidget.entitlements";
 			};
 			name = Release;
 		};
@@ -449,11 +630,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CA4F39FAAB29E3FDC0219096 /* Build configuration list for PBXNativeTarget "Auris" */ = {
+		23746EFE221170E24101FE05 /* Build configuration list for PBXNativeTarget "Auris" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				092AF95CB55BE40AED25F70D /* Debug */,
-				A2931430985F6734DC47E558 /* Release */,
+				296606123BC51EF2B3893761 /* Debug */,
+				D1D2CC000E421B32B804B657 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9CCA196484B5464F17B9BF6F /* Build configuration list for PBXNativeTarget "AurisWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				621126193A17D245A66D9D22 /* Debug */,
+				691C620FA5A998553FD0BDC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

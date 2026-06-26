@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 
 struct IdleView: View {
     @Bindable var recorder: RecordingViewModel
@@ -8,10 +9,28 @@ struct IdleView: View {
         VStack(spacing: 0) {
             header
             Spacer()
-            content
+            if recorder.errorMessage != nil { errorState } else { content }
             Spacer()
         }
         .background(AurisColor.bgPanel)
+    }
+
+    private var errorState: some View {
+        StatusCard(
+            icon: "mic.slash.fill",
+            iconTint: AurisColor.danger,
+            title: "Microphone unavailable",
+            message: "Permission was denied or no device was found. Check access in System Settings.",
+            actionLabel: "Open Settings",
+            actionIcon: "arrow.up.forward.app",
+            action: {
+                if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Microphone") {
+                    NSWorkspace.shared.open(url)
+                }
+                recorder.errorMessage = nil
+            }
+        )
+        .padding(.horizontal, 28)
     }
 
     private var header: some View {

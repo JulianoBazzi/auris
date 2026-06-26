@@ -8,6 +8,14 @@ struct SummaryView: View {
     @State private var tab: Tab = .summary
     @State private var player: AVAudioPlayer?
     @State private var isPlaying = false
+    @State private var currentTime: TimeInterval = 0
+
+    private let ticker = Timer.publish(every: 0.2, on: .main, in: .common).autoconnect()
+
+    private var totalDuration: TimeInterval {
+        let d = player?.duration ?? 0
+        return d > 0 ? d : meeting.duration
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -56,16 +64,56 @@ struct SummaryView: View {
                     .background(LinearGradient.auris, in: Circle())
             }
             .buttonStyle(.plain)
-            WaveformView(level: isPlaying ? 0.7 : 0.25)
-                .frame(height: 28)
-                .frame(maxWidth: .infinity)
-            Text(meeting.formattedDuration)
+            seekBar
+            Text("\(format(currentTime)) / \(format(totalDuration))")
                 .font(AurisFont.mono(12))
                 .foregroundStyle(AurisColor.textSecondary)
         }
         .padding(.vertical, 14)
         .padding(.horizontal, 28)
         .overlay(alignment: .bottom) { Rectangle().fill(AurisColor.borderSubtle).frame(height: 1) }
+        .onReceive(ticker) { _ in
+            guard let player, isPlaying else { return }
+            currentTime = player.currentTime
+            if !player.isPlaying { isPlaying = false }
+        }
+        .onDisappear { player?.stop() }
+    }
+
+    /// Waveform doubling as a clickable progress / scrub bar.
+    private var seekBar: some View {
+        GeometryReader { geo in
+            let fraction = totalDuration > 0 ? min(1, max(0, currentTime / totalDuration)) : 0
+            ZStack(alignment: .leading) {
+                WaveformView(level: isPlaying ? 0.7 : 0.3)
+                    .frame(height: 28)
+                Rectangle()
+                    .fill(AurisColor.accentBright.opacity(0.25))
+                    .frame(width: geo.size.width * fraction, height: 28)
+                    .allowsHitTesting(false)
+            }
+            .contentShape(Rectangle())
+            .gesture(
+                DragGesture(minimumDistance: 0).onEnded { value in
+                    seek(to: value.location.x / geo.size.width)
+                }
+            )
+        }
+        .frame(height: 28)
+        .frame(maxWidth: .infinity)
+    }
+
+    private func seek(to fraction: CGFloat) {
+        guard totalDuration > 0 else { return }
+        ensurePlayer()
+        let time = Double(min(1, max(0, fraction))) * totalDuration
+        player?.currentTime = time
+        currentTime = time
+    }
+
+    private func format(_ t: TimeInterval) -> String {
+        let total = Int(t)
+        return String(format: "%02d:%02d", total / 60, total % 60)
     }
 
     private var tabBar: some View {
@@ -149,10 +197,14 @@ struct SummaryView: View {
 
     private func togglePlay() {
         if isPlaying { player?.pause(); isPlaying = false; return }
-        if player == nil, let name = meeting.audioFileName {
-            player = try? AVAudioPlayer(contentsOf: RecordingStore.recordingURL(named: name))
-        }
+        ensurePlayer()
         player?.play()
         isPlaying = player != nil
+    }
+
+    private func ensurePlayer() {
+        guard player == nil, let name = meeting.audioFileName else { return }
+        player = try? AVAudioPlayer(contentsOf: RecordingStore.recordingURL(named: name))
+        player?.prepareToPlay()
     }
 }

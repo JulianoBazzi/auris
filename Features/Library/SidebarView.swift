@@ -6,6 +6,7 @@ struct SidebarView: View {
     @Bindable var library: LibraryViewModel
     var onNewMeeting: () -> Void
     var onSettings: () -> Void
+    var onDelete: (Meeting) -> Void
 
     var body: some View {
         VStack(spacing: 0) {
@@ -36,6 +37,11 @@ struct SidebarView: View {
                                 )
                             }
                             .buttonStyle(.plain)
+                            .contextMenu {
+                                Button(role: .destructive) { onDelete(meeting) } label: {
+                                    Label("Delete…", systemImage: "trash")
+                                }
+                            }
                         }
                     }
                 }
@@ -74,7 +80,7 @@ struct SidebarView: View {
                 Circle()
                     .fill(appState.hasOpenAIKey ? AurisColor.success : AurisColor.textMuted)
                     .frame(width: 8, height: 8)
-                Text(appState.hasOpenAIKey ? "GPT-4o connected" : "Not connected")
+                Text(appState.hasOpenAIKey ? "\(appState.summaryModel) connected" : "Not connected")
                     .font(AurisFont.ui(12, .medium))
                     .foregroundStyle(AurisColor.textSecondary)
                 Spacer(minLength: 0)

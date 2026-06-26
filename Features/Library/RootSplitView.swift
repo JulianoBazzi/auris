@@ -11,6 +11,7 @@ struct RootSplitView: View {
     @State private var library = LibraryViewModel()
     @State private var showConsent = false
     @State private var showSettings = false
+    @State private var meetingToDelete: Meeting?
 
     private var selectedMeeting: Meeting? {
         meetings.first { $0.id == appState.selectedMeetingID }
@@ -25,7 +26,8 @@ struct RootSplitView: View {
                     meetings: library.filtered(meetings),
                     library: library,
                     onNewMeeting: { startNewMeeting() },
-                    onSettings: { showSettings = true }
+                    onSettings: { showSettings = true },
+                    onDelete: { meetingToDelete = $0 }
                 )
                 .frame(width: 262)
 
@@ -43,7 +45,10 @@ struct RootSplitView: View {
         .sheet(isPresented: $showConsent) {
             ConsentSheet { proceed in
                 showConsent = false
-                if proceed { Task { await recorder.start(locale: appState.transcriptionLocale) } }
+                if proceed {
+                    recorder.selfSpeakerName = appState.userDisplayName
+                    Task { await recorder.start(locale: appState.transcriptionLocale) }
+                }
             }
             .environment(\.locale, appState.localeOverride ?? Locale.current)
         }
@@ -52,31 +57,66 @@ struct RootSplitView: View {
                 .environment(appState)
                 .environment(\.locale, appState.localeOverride ?? Locale.current)
         }
+        .sheet(item: $meetingToDelete) { meeting in
+            DeleteMeetingSheet(
+                meeting: meeting,
+                onCancel: { meetingToDelete = nil },
+                onConfirm: { delete(meeting) }
+            )
+            .environment(\.locale, appState.localeOverride ?? Locale.current)
+        }
     }
 
     @ViewBuilder
     private var mainArea: some View {
-        switch recorder.phase {
-        case .recording, .paused, .summarizing:
+        if recorder.isActive {
             RecordingView(recorder: recorder, onFinish: { meeting in
                 if let meeting { appState.selectedMeetingID = meeting.id }
                 recorder.reset()
             })
-        default:
-            if let meeting = selectedMeeting {
-                SummaryView(meeting: meeting)
-            } else {
-                IdleView(
-                    recorder: recorder,
-                    onStart: { showConsent = true }
-                )
-            }
+        } else if let meeting = selectedMeeting {
+            SummaryView(meeting: meeting)
+        } else if meetings.isEmpty {
+            emptyState
+        } else {
+            IdleView(recorder: recorder, onStart: { showConsent = true })
         }
+    }
+
+    private var emptyState: some View {
+        VStack {
+            Spacer()
+            StatusCard(
+                icon: "mic.fill",
+                title: "No meetings yet",
+                message: "Start your first meeting and Auris captures it here with transcript and summary.",
+                actionLabel: "Start meeting",
+                actionIcon: "record.circle",
+                action: { startNewMeeting() }
+            )
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(AurisColor.bgPanel)
     }
 
     private func startNewMeeting() {
         appState.selectedMeetingID = nil
         recorder.reset()
         showConsent = true
+    }
+
+    private func delete(_ meeting: Meeting) {
+        if let name = meeting.audioFileName {
+            try? FileManager.default.removeItem(at: RecordingStore.recordingURL(named: name))
+        }
+        for attachment in meeting.attachments {
+            try? FileManager.default.removeItem(at: RecordingStore.attachmentURL(named: attachment.fileName))
+        }
+        if appState.selectedMeetingID == meeting.id { appState.selectedMeetingID = nil }
+        context.delete(meeting)
+        try? context.save()
+        SharedStore.updateRecent(from: context)
+        meetingToDelete = nil
     }
 }

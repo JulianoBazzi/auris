@@ -1,5 +1,7 @@
 import SwiftUI
 import SwiftData
+import UniformTypeIdentifiers
+import AppKit
 
 struct RecordingView: View {
     @Environment(AppState.self) private var appState
@@ -9,10 +11,12 @@ struct RecordingView: View {
 
     @State private var title: String = ""
     @State private var showSpeakerSheet = false
+    @State private var showImporter = false
 
     var body: some View {
         VStack(spacing: 0) {
             header
+            if recorder.systemCaptureDenied { systemDeniedBanner }
             transcript
             controlBar
         }
@@ -24,9 +28,36 @@ struct RecordingView: View {
             }
             .environment(\.locale, appState.localeOverride ?? Locale.current)
         }
+        .sheet(isPresented: suggestionBinding) {
+            if let suggestion = recorder.suggestion, let meeting = recorder.pendingMeeting {
+                AISuggestionsSheet(
+                    suggestion: suggestion,
+                    onApply: { t, tags, color in
+                        recorder.applySuggestion(title: t, tags: tags, colorHex: color, to: meeting, context: context)
+                        runSummary(meeting)
+                    },
+                    onDiscard: { runSummary(meeting) }
+                )
+                .environment(\.locale, appState.localeOverride ?? Locale.current)
+            }
+        }
+        .fileImporter(isPresented: $showImporter, allowedContentTypes: [.image], allowsMultipleSelection: true) { result in
+            if case .success(let urls) = result {
+                for url in urls { importImage(url) }
+            }
+        }
         .overlay {
             if recorder.phase == .summarizing { summarizingOverlay }
+            else if recorder.summaryFailed { summaryFailedOverlay }
         }
+    }
+
+    /// Present the suggestions sheet while phase is `.suggesting` and a suggestion exists.
+    private var suggestionBinding: Binding<Bool> {
+        Binding(
+            get: { recorder.phase == .suggesting && recorder.suggestion != nil && recorder.pendingMeeting != nil },
+            set: { _ in }
+        )
     }
 
     private var header: some View {
@@ -47,6 +78,37 @@ struct RecordingView: View {
         .overlay(alignment: .bottom) {
             Rectangle().fill(AurisColor.borderSubtle).frame(height: 1)
         }
+    }
+
+    private var systemDeniedBanner: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "rectangle.dashed.badge.record")
+                .font(.system(size: 15)).foregroundStyle(AurisColor.warn)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("System audio blocked")
+                    .font(AurisFont.ui(13, .semibold)).foregroundStyle(AurisColor.textPrimary)
+                Text("Grant Screen Recording, then restart Auris to capture system audio. Recording continues with the microphone only.")
+                    .font(AurisFont.ui(11)).foregroundStyle(AurisColor.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 8)
+            Button { AppRelaunch.openScreenRecordingSettings() } label: {
+                Text("Open Settings")
+                    .font(AurisFont.ui(12, .medium)).foregroundStyle(AurisColor.textSecondary)
+                    .padding(.vertical, 6).padding(.horizontal, 12)
+                    .overlay(Capsule().stroke(AurisColor.border, lineWidth: 1))
+            }.buttonStyle(.plain)
+            Button { AppRelaunch.restart() } label: {
+                Text("Restart")
+            }.buttonStyle(GradientButtonStyle(horizontalPadding: 14, verticalPadding: 6, fontSize: 12))
+            Button { recorder.systemCaptureDenied = false } label: {
+                Image(systemName: "xmark").font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(AurisColor.textMuted)
+            }.buttonStyle(.plain)
+        }
+        .padding(.vertical, 10).padding(.horizontal, 28)
+        .background(AurisColor.warn.opacity(0.10))
+        .overlay(alignment: .bottom) { Rectangle().fill(AurisColor.borderSubtle).frame(height: 1) }
     }
 
     private var recordingBadge: some View {
@@ -93,19 +155,39 @@ struct RecordingView: View {
                     }
                     if !recorder.liveText.isEmpty {
                         TranscriptRow(
-                            speakerName: recorder.participants.first ?? String(localized: "Speaker 1"),
+                            speakerName: recorder.micSpeaker,
                             timestamp: "…",
                             text: recorder.liveText
                         )
                         .opacity(0.6)
                         .id("live")
                     }
+                    if !recorder.pendingImages.isEmpty { attachmentStrip }
                 }
                 .padding(28)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             .onChange(of: recorder.segments.count) {
                 withAnimation { proxy.scrollTo(recorder.segments.last?.id, anchor: .bottom) }
+            }
+        }
+    }
+
+    private var attachmentStrip: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Attachments").font(AurisFont.ui(11, .semibold)).foregroundStyle(AurisColor.textMuted)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    ForEach(Array(recorder.pendingImages.enumerated()), id: \.offset) { _, data in
+                        if let img = NSImage(data: data) {
+                            Image(nsImage: img)
+                                .resizable().scaledToFill()
+                                .frame(width: 140, height: 88)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(AurisColor.border, lineWidth: 1))
+                        }
+                    }
+                }
             }
         }
     }
@@ -120,6 +202,9 @@ struct RecordingView: View {
                 .frame(maxWidth: .infinity)
             Button { showSpeakerSheet = true } label: {
                 controlLabel("person.badge.plus", "Identify speaker")
+            }.buttonStyle(.plain)
+            Button { showImporter = true } label: {
+                controlLabel("paperclip", "Attach")
             }.buttonStyle(.plain)
             Button {
                 if recorder.phase == .paused { recorder.resume() } else { recorder.pause() }
@@ -157,28 +242,83 @@ struct RecordingView: View {
     }
 
     private var summarizingOverlay: some View {
+        processingCard(
+            title: "Generating summary…",
+            subtitle: "Auris is turning the transcript into an executive summary."
+        )
+    }
+
+    private func processingCard(title: LocalizedStringKey, subtitle: LocalizedStringKey) -> some View {
         ZStack {
-            AurisColor.bgWindow.opacity(0.7).ignoresSafeArea()
+            AurisColor.bgWindow.opacity(0.78).ignoresSafeArea()
             VStack(spacing: 14) {
                 ProgressView().controlSize(.large)
-                Text("Generating summary…")
-                    .font(AurisFont.ui(14, .medium))
+                Text(title)
+                    .font(AurisFont.ui(15, .semibold))
                     .foregroundStyle(AurisColor.textPrimary)
+                Text(subtitle)
+                    .font(AurisFont.ui(12))
+                    .foregroundStyle(AurisColor.textSecondary)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: 280)
             }
-            .padding(28)
-            .background(AurisColor.bgElevated, in: RoundedRectangle(cornerRadius: 14))
+            .padding(30)
+            .background(AurisColor.bgElevated, in: RoundedRectangle(cornerRadius: 16))
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(AurisColor.border, lineWidth: 1))
         }
+    }
+
+    private var summaryFailedOverlay: some View {
+        ZStack {
+            AurisColor.bgWindow.opacity(0.78).ignoresSafeArea()
+            VStack(spacing: 16) {
+                StatusCard(
+                    icon: "exclamationmark.triangle.fill",
+                    iconTint: AurisColor.danger,
+                    title: "Couldn't generate the summary",
+                    message: "The transcript was saved. Check your OpenAI key and connection, then try again.",
+                    actionLabel: "Try again",
+                    actionIcon: "arrow.clockwise",
+                    action: { if let m = recorder.pendingMeeting { runSummary(m) } }
+                )
+                Button { onFinish(recorder.pendingMeeting) } label: {
+                    Text("View anyway")
+                        .font(AurisFont.ui(13, .medium)).foregroundStyle(AurisColor.textSecondary)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+
+    private func importImage(_ url: URL) {
+        let needsScope = url.startAccessingSecurityScopedResource()
+        defer { if needsScope { url.stopAccessingSecurityScopedResource() } }
+        guard let img = NSImage(contentsOf: url),
+              let tiff = img.tiffRepresentation,
+              let rep = NSBitmapImageRep(data: tiff),
+              let png = rep.representation(using: .png, properties: [:]) else { return }
+        recorder.attach(png)
     }
 
     private func finish() {
         Task {
-            let meeting = await recorder.stopAndSave(
+            let meeting = await recorder.stopAndPersist(
                 context: context,
                 title: title,
                 locale: appState.transcriptionLocale,
                 summaryLanguage: appState.summaryLanguage
             )
-            onFinish(meeting)
+            // If there is no suggestion to confirm, go straight to the summary step.
+            if recorder.suggestion == nil, let meeting { runSummary(meeting) }
+        }
+    }
+
+    private func runSummary(_ meeting: Meeting) {
+        Task {
+            await recorder.generateSummary(
+                for: meeting, context: context, summaryLanguage: appState.summaryLanguage
+            )
+            if !recorder.summaryFailed { onFinish(meeting) }
         }
     }
 }

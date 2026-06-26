@@ -24,6 +24,22 @@ final class AppState {
     var interfaceLanguage: String {
         didSet { defaults.set(interfaceLanguage, forKey: Keys.interfaceLanguage) }
     }
+    /// OpenAI model id used for summaries + AI suggestions (e.g. "gpt-4o").
+    var summaryModel: String {
+        didSet { defaults.set(summaryModel, forKey: Keys.summaryModel) }
+    }
+    /// Name used to label the user's own (microphone) speech in transcripts.
+    var userDisplayName: String {
+        didSet { defaults.set(userDisplayName, forKey: Keys.userDisplayName) }
+    }
+    /// Transcribe system audio (remote participants) as a second stream.
+    var transcribeSystemAudio: Bool {
+        didSet { defaults.set(transcribeSystemAudio, forKey: Keys.transcribeSystemAudio) }
+    }
+    /// Play an audible notice when a recording starts (default for the consent sheet).
+    var playNotice: Bool {
+        didSet { defaults.set(playNotice, forKey: Keys.playNotice) }
+    }
     var hasOpenAIKey: Bool
 
     private let defaults = UserDefaults.standard
@@ -32,6 +48,10 @@ final class AppState {
         static let transcriptionLocale = "auris.transcriptionLocale"
         static let summaryLanguage = "auris.summaryLanguage"
         static let interfaceLanguage = "auris.interfaceLanguage"
+        static let summaryModel = "auris.summaryModel"
+        static let userDisplayName = "auris.userDisplayName"
+        static let transcribeSystemAudio = "auris.transcribeSystemAudio"
+        static let playNotice = "auris.playNotice"
     }
 
     init() {
@@ -40,6 +60,8 @@ final class AppState {
         transcriptionLocale = defaults.string(forKey: Keys.transcriptionLocale) ?? "en-US"
         summaryLanguage = defaults.string(forKey: Keys.summaryLanguage) ?? "en"
         interfaceLanguage = defaults.string(forKey: Keys.interfaceLanguage) ?? ""
+        summaryModel = defaults.string(forKey: Keys.summaryModel) ?? "gpt-4o"
+        userDisplayName = defaults.string(forKey: Keys.userDisplayName) ?? String(localized: "Me")
         hasOpenAIKey = KeychainStore.hasKey
     }
 

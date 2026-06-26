@@ -9,7 +9,6 @@ struct SpeakerNamingSheet: View {
     @State private var remember = true
 
     private let palette = ["#34D399", "#43A5FF", "#60A5FA", "#B07CF6", "#FBBF24", "#F87171"]
-    private let knownVoices = ["Bruno Costa", "Carla Mendes"]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
@@ -48,28 +47,6 @@ struct SpeakerNamingSheet: View {
                         .frame(width: 22, height: 22)
                         .overlay(Circle().stroke(.white, lineWidth: colorHex == hex ? 2 : 0))
                         .onTapGesture { colorHex = hex }
-                }
-            }
-
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Known voices")
-                    .font(AurisFont.ui(11, .semibold))
-                    .foregroundStyle(AurisColor.textMuted)
-                ForEach(knownVoices, id: \.self) { voice in
-                    HStack {
-                        Text(voice)
-                            .font(AurisFont.ui(13, .medium))
-                            .foregroundStyle(AurisColor.textPrimary)
-                        Spacer()
-                        Button { name = voice } label: {
-                            Text("Use")
-                                .font(AurisFont.ui(12, .semibold))
-                                .foregroundStyle(AurisColor.accentBright)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                    .padding(.vertical, 9).padding(.horizontal, 12)
-                    .background(AurisColor.bgPanel, in: RoundedRectangle(cornerRadius: 9))
                 }
             }
 

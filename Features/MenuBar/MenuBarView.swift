@@ -16,7 +16,7 @@ struct MenuBarView: View {
                 HStack(spacing: 6) {
                     Circle().fill(appState.hasOpenAIKey ? AurisColor.success : AurisColor.textMuted)
                         .frame(width: 7, height: 7)
-                    Text(appState.hasOpenAIKey ? "GPT-4o connected" : "Not connected")
+                    Text(appState.hasOpenAIKey ? "\(appState.summaryModel) connected" : "Not connected")
                         .font(AurisFont.ui(11)).foregroundStyle(AurisColor.textSecondary)
                 }
             }
