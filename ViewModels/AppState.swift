@@ -62,6 +62,8 @@ final class AppState {
         interfaceLanguage = defaults.string(forKey: Keys.interfaceLanguage) ?? ""
         summaryModel = defaults.string(forKey: Keys.summaryModel) ?? "gpt-4o"
         userDisplayName = defaults.string(forKey: Keys.userDisplayName) ?? String(localized: "Me")
+        transcribeSystemAudio = defaults.object(forKey: Keys.transcribeSystemAudio) as? Bool ?? true
+        playNotice = defaults.object(forKey: Keys.playNotice) as? Bool ?? true
         hasOpenAIKey = KeychainStore.hasKey
     }
 

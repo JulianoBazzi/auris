@@ -3,10 +3,17 @@ import AppKit
 
 /// "Before we start recording" consent modal. (.pen: Screen · Consentimento)
 struct ConsentSheet: View {
+    var playNoticeDefault: Bool = true
     var onResult: (_ proceed: Bool) -> Void
 
     @State private var consented = false
-    @State private var playNotice = true
+    @State private var playNotice: Bool
+
+    init(playNoticeDefault: Bool = true, onResult: @escaping (_ proceed: Bool) -> Void) {
+        self.playNoticeDefault = playNoticeDefault
+        self.onResult = onResult
+        _playNotice = State(initialValue: playNoticeDefault)
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {

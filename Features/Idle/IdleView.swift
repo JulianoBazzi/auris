@@ -17,10 +17,10 @@ struct IdleView: View {
 
     private var errorState: some View {
         StatusCard(
-            icon: "mic.slash.fill",
+            icon: "exclamationmark.triangle.fill",
             iconTint: AurisColor.danger,
-            title: "Microphone unavailable",
-            message: "Permission was denied or no device was found. Check access in System Settings.",
+            title: "Couldn't start recording",
+            message: "\(recorder.errorMessage ?? "")",
             actionLabel: "Open Settings",
             actionIcon: "arrow.up.forward.app",
             action: {

@@ -31,6 +31,8 @@ final class RecordingViewModel {
     var captureSystem = true
     /// Display name used to label the user's own (microphone) speech. Set from settings before start.
     var selfSpeakerName: String = ""
+    /// Whether to transcribe system audio as a second stream. Set from settings before start.
+    var transcribeSystem = true
 
     private let audio: AudioCapturing
     private let transcriber: Transcribing
@@ -89,7 +91,6 @@ final class RecordingViewModel {
 
         audio.onLevel = { [weak self] lvl in self?.level = lvl }
         audio.onBuffer = { [weak self] buf in self?.transcriber.append(buf) }
-        audio.onSystemBuffer = { [weak self] buf in self?.systemTranscriber.append(buf) }
         audio.onSystemCaptureError = { [weak self] _ in
             // Non-fatal: keep recording mic-only, but surface the restart banner.
             Task { @MainActor in self?.systemCaptureDenied = true }
@@ -97,14 +98,19 @@ final class RecordingViewModel {
         transcriber.onSegment = { [weak self] seg in
             Task { @MainActor in self?.ingestMic(seg) }
         }
-        systemTranscriber.onSegment = { [weak self] seg in
-            Task { @MainActor in self?.ingestSystem(seg) }
+        if transcribeSystem {
+            audio.onSystemBuffer = { [weak self] buf in self?.systemTranscriber.append(buf) }
+            systemTranscriber.onSegment = { [weak self] seg in
+                Task { @MainActor in self?.ingestSystem(seg) }
+            }
         }
 
         do {
             try transcriber.start(locale: locale, startOffset: { [weak self] in self?.elapsed ?? 0 })
             // System-audio transcription is best-effort (second recognizer).
-            try? systemTranscriber.start(locale: locale, startOffset: { [weak self] in self?.elapsed ?? 0 })
+            if transcribeSystem {
+                try? systemTranscriber.start(locale: locale, startOffset: { [weak self] in self?.elapsed ?? 0 })
+            }
             try await audio.start(captureMic: captureMic, captureSystem: captureSystem, fileName: name)
             startDate = Date()
             accumulatedBeforePause = 0

@@ -34,7 +34,7 @@ struct RootSplitView: View {
                 mainArea
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                if appState.showDetailPanel, recorder.phase == .idle, let meeting = selectedMeeting {
+                if appState.showDetailPanel, !showSettings, recorder.phase == .idle, let meeting = selectedMeeting {
                     DetailPanel(meeting: meeting)
                         .frame(width: 300)
                         .transition(.move(edge: .trailing))
@@ -43,19 +43,18 @@ struct RootSplitView: View {
         }
         .background(AurisColor.bgWindow)
         .sheet(isPresented: $showConsent) {
-            ConsentSheet { proceed in
+            ConsentSheet(playNoticeDefault: appState.playNotice) { proceed in
                 showConsent = false
                 if proceed {
                     recorder.selfSpeakerName = appState.userDisplayName
+                    recorder.transcribeSystem = appState.transcribeSystemAudio
                     Task { await recorder.start(locale: appState.transcriptionLocale) }
                 }
             }
             .environment(\.locale, appState.localeOverride ?? Locale.current)
         }
-        .sheet(isPresented: $showSettings) {
-            SettingsView()
-                .environment(appState)
-                .environment(\.locale, appState.localeOverride ?? Locale.current)
+        .onChange(of: appState.selectedMeetingID) { _, newValue in
+            if newValue != nil { showSettings = false }
         }
         .sheet(item: $meetingToDelete) { meeting in
             DeleteMeetingSheet(
@@ -74,8 +73,12 @@ struct RootSplitView: View {
                 if let meeting { appState.selectedMeetingID = meeting.id }
                 recorder.reset()
             })
+        } else if showSettings {
+            SettingsView(onClose: { showSettings = false })
         } else if let meeting = selectedMeeting {
             SummaryView(meeting: meeting)
+        } else if recorder.errorMessage != nil {
+            IdleView(recorder: recorder, onStart: { showConsent = true })
         } else if meetings.isEmpty {
             emptyState
         } else {
@@ -102,6 +105,7 @@ struct RootSplitView: View {
 
     private func startNewMeeting() {
         appState.selectedMeetingID = nil
+        showSettings = false
         recorder.reset()
         showConsent = true
     }

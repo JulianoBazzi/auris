@@ -1,11 +1,12 @@
 import SwiftUI
 import AVFoundation
 import Speech
+import CoreGraphics
 
 struct OnboardingView: View {
     @Environment(AppState.self) private var appState
     @State private var micGranted = false
-    @State private var speechGranted = false
+    @State private var screenGranted = false
     @State private var apiKey = ""
     @State private var keySaved = false
 
@@ -24,6 +25,14 @@ struct OnboardingView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(AurisColor.bgWindow)
+        .onAppear { reflectStatus() }
+    }
+
+    /// Reflect already-granted permissions so the cards show a checkmark instead of "Allow".
+    private func reflectStatus() {
+        micGranted = AVCaptureDevice.authorizationStatus(for: .audio) == .authorized
+        screenGranted = CGPreflightScreenCaptureAccess()
+        keySaved = appState.hasOpenAIKey
     }
 
     private var languagePicker: some View {
@@ -72,12 +81,16 @@ struct OnboardingView: View {
                 permissionCard(icon: "mic.fill", title: "Microphone",
                                subtitle: "Records the microphone into your meeting.",
                                granted: micGranted, actionKey: "Allow") {
-                    Task { micGranted = await requestMic() }
+                    Task {
+                        let mic = await requestMic()
+                        _ = await requestSpeech()
+                        micGranted = mic
+                    }
                 }
                 permissionCard(icon: "rectangle.inset.filled", title: "Screen capture",
                                subtitle: "Required to capture system audio (Zoom, Meet, Teams).",
-                               granted: speechGranted, actionKey: "Allow") {
-                    Task { speechGranted = await requestSpeech() }
+                               granted: screenGranted, actionKey: "Allow") {
+                    screenGranted = CGRequestScreenCaptureAccess()
                 }
                 openAICard
             }
