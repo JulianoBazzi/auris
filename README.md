@@ -7,7 +7,7 @@
 Auris listens to your microphone and system audio, transcribes the conversation on-device with macOS's native speech engine, and turns it into a clean, GPT-powered summary with action items. Bring your own OpenAI key. Open source.
 
 [![Platform](https://img.shields.io/badge/platform-macOS%2026%2B-blue)](https://www.apple.com/macos/)
-[![Swift](https://img.shields.io/badge/Swift-5.0-orange)](https://swift.org)
+[![Swift](https://img.shields.io/badge/Swift-6.3.2-orange)](https://swift.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](#contributing)
 

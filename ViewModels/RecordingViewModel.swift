@@ -3,6 +3,7 @@ import SwiftUI
 import SwiftData
 import Observation
 import AVFoundation
+import os
 
 /// A volatile (in-progress) utterance for one stream, anchored at the time it began.
 struct LiveTurn: Identifiable, Equatable {
@@ -31,6 +32,9 @@ final class RecordingViewModel {
 
     var phase: Phase = .idle
     var elapsed: TimeInterval = 0
+    /// Thread-safe mirror of `elapsed`, read off the main actor by the transcription streams
+    /// (which run on background threads) to timestamp incoming segments without a data race.
+    private let elapsedClock = OSAllocatedUnfairLock<TimeInterval>(initialState: 0)
     var level: Float = 0
     /// In-progress (volatile) utterance for each stream, shown live in chronological position.
     var liveMic: LiveTurn?
@@ -178,9 +182,9 @@ final class RecordingViewModel {
         }
 
         do {
-            try await transcriber.start(locale: locale, startOffset: { [weak self] in self?.elapsed ?? 0 })
+            try await transcriber.start(locale: locale, startOffset: { [elapsedClock] in elapsedClock.withLock { $0 } })
             if transcribeSystem {
-                try? await systemTranscriber.start(locale: locale, startOffset: { [weak self] in self?.elapsed ?? 0 })
+                try? await systemTranscriber.start(locale: locale, startOffset: { [elapsedClock] in elapsedClock.withLock { $0 } })
             }
             try await audio.start(captureMic: captureMic, captureSystem: captureSystem, fileName: name)
             startDate = Date()
@@ -391,7 +395,7 @@ final class RecordingViewModel {
 
     func reset() {
         phase = .idle
-        elapsed = 0; level = 0; liveMic = nil; liveSystem = nil
+        elapsed = 0; elapsedClock.withLock { $0 = 0 }; level = 0; liveMic = nil; liveSystem = nil
         segments = []; pendingImages = []
         errorMessage = nil; summaryFailed = false; systemCaptureDenied = false
         suggestion = nil; pendingMeeting = nil
@@ -403,7 +407,9 @@ final class RecordingViewModel {
         timer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
             Task { @MainActor in
                 guard let self, let start = self.startDate else { return }
-                self.elapsed = self.accumulatedBeforePause + Date().timeIntervalSince(start)
+                let now = self.accumulatedBeforePause + Date().timeIntervalSince(start)
+                self.elapsed = now
+                self.elapsedClock.withLock { $0 = now }
             }
         }
     }

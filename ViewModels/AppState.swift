@@ -8,6 +8,7 @@ enum AppRoute: Equatable {
 }
 
 /// Global app settings + navigation, persisted to UserDefaults.
+@MainActor
 @Observable
 final class AppState {
     var route: AppRoute

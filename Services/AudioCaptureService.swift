@@ -1,5 +1,5 @@
 import Foundation
-import AVFoundation
+@preconcurrency import AVFoundation
 import ScreenCaptureKit
 import OSLog
 
@@ -9,16 +9,18 @@ enum CaptureState: Equatable {
     case idle, recording, paused, finished
 }
 
-protocol AudioCapturing: AnyObject {
+protocol AudioCapturing: AnyObject, Sendable {
     var state: CaptureState { get }
     /// Called on the main actor with the latest input level (0...1) for the waveform.
-    var onLevel: ((Float) -> Void)? { get set }
+    var onLevel: (@MainActor @Sendable (Float) -> Void)? { get set }
     /// Forwards microphone PCM buffers (mono, native format) to the transcription service.
-    var onBuffer: ((AVAudioPCMBuffer) -> Void)? { get set }
+    /// Invoked on the audio engine's render thread — must not hop to the main actor.
+    var onBuffer: (@Sendable (AVAudioPCMBuffer) -> Void)? { get set }
     /// Forwards system-audio PCM buffers (mono) to a second transcription stream.
-    var onSystemBuffer: ((AVAudioPCMBuffer) -> Void)? { get set }
+    /// Invoked on the ScreenCaptureKit sample-handler queue.
+    var onSystemBuffer: (@Sendable (AVAudioPCMBuffer) -> Void)? { get set }
     /// Non-fatal: system-audio (ScreenCaptureKit) capture failed; recording continues mic-only.
-    var onSystemCaptureError: ((Error) -> Void)? { get set }
+    var onSystemCaptureError: (@Sendable (Error) -> Void)? { get set }
     func start(captureMic: Bool, captureSystem: Bool, fileName: String) async throws
     func pause()
     func resume()
@@ -30,10 +32,10 @@ protocol AudioCapturing: AnyObject {
 /// main mixer, and the mixer output is written to disk.
 final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStreamDelegate, @unchecked Sendable {
     private(set) var state: CaptureState = .idle
-    var onLevel: ((Float) -> Void)?
-    var onBuffer: ((AVAudioPCMBuffer) -> Void)?
-    var onSystemBuffer: ((AVAudioPCMBuffer) -> Void)?
-    var onSystemCaptureError: ((Error) -> Void)?
+    var onLevel: (@MainActor @Sendable (Float) -> Void)?
+    var onBuffer: (@Sendable (AVAudioPCMBuffer) -> Void)?
+    var onSystemBuffer: (@Sendable (AVAudioPCMBuffer) -> Void)?
+    var onSystemCaptureError: (@Sendable (Error) -> Void)?
 
     private let engine = AVAudioEngine()
     private let systemPlayer = AVAudioPlayerNode()
@@ -103,7 +105,7 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
             guard let self else { return }
             self.writeQueue.async { try? self.audioFile?.write(from: buffer) }
             let level = Self.peakLevel(buffer)
-            DispatchQueue.main.async { self.onLevel?(level) }
+            DispatchQueue.main.async { MainActor.assumeIsolated { self.onLevel?(level) } }
         }
 
         // Tap micMixer for clean mic-only audio fed to the mic recognizer (mono downmix).
@@ -215,7 +217,7 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
         let ratio = monoFormat.sampleRate / input.format.sampleRate
         let capacity = AVAudioFrameCount(Double(input.frameLength) * ratio) + 1024
         guard let output = AVAudioPCMBuffer(pcmFormat: monoFormat, frameCapacity: capacity) else { return nil }
-        var fed = false
+        nonisolated(unsafe) var fed = false
         var error: NSError?
         converter.convert(to: output, error: &error) { _, status in
             if fed { status.pointee = .noDataNow; return nil }
@@ -235,7 +237,7 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
         let ratio = sysFormat.sampleRate / input.format.sampleRate
         let capacity = AVAudioFrameCount(Double(input.frameLength) * ratio) + 1024
         guard let output = AVAudioPCMBuffer(pcmFormat: sysFormat, frameCapacity: capacity) else { return nil }
-        var fed = false
+        nonisolated(unsafe) var fed = false
         var error: NSError?
         converter.convert(to: output, error: &error) { _, status in
             if fed { status.pointee = .noDataNow; return nil }

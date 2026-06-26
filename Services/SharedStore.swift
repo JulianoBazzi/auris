@@ -1,5 +1,5 @@
 import Foundation
-import SwiftData
+@preconcurrency import SwiftData
 import WidgetKit
 
 /// Writes the shared `AurisSnapshot` to the app group and reloads widget timelines.
@@ -27,9 +27,11 @@ enum SharedStore {
 
     @MainActor
     static func updateRecent(from context: ModelContext) {
-        var descriptor = FetchDescriptor<Meeting>(sortBy: [SortDescriptor(\.createdAt, order: .reverse)])
-        descriptor.fetchLimit = 4
-        let meetings = (try? context.fetch(descriptor)) ?? []
+        // Sort in memory rather than via a SortDescriptor key path (SwiftData @Model key paths
+        // aren't Sendable under strict concurrency). The recent list is tiny, so cost is trivial.
+        let meetings = ((try? context.fetch(FetchDescriptor<Meeting>())) ?? [])
+            .sorted { $0.createdAt > $1.createdAt }
+            .prefix(4)
         var snapshot = load()
         snapshot.recent = meetings.map {
             MeetingSnapshot(id: $0.id, title: $0.title, colorHex: $0.colorHex,

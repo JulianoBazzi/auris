@@ -14,7 +14,7 @@ struct MeetingSuggestion: Codable {
     var colorHex: String
 }
 
-protocol Summarizing: AnyObject {
+protocol Summarizing: AnyObject, Sendable {
     func summarize(transcript: String, imageData: [Data], language: String) async throws -> MeetingSummary
     /// Suggests a title, alternative title, tags and accent color from the transcript.
     func suggestMetadata(transcript: String, language: String) async throws -> MeetingSuggestion
@@ -34,7 +34,7 @@ enum SummarizationError: LocalizedError {
 
 /// Calls the OpenAI Chat Completions API to turn a transcript (+ optional images) into a
 /// structured summary. The API key comes from the Keychain.
-final class SummarizationService: Summarizing {
+final class SummarizationService: Summarizing, Sendable {
     private let session: URLSession
 
     /// Read at call time so changing the model in Settings takes effect without recreating the service.

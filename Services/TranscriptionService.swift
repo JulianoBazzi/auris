@@ -1,5 +1,5 @@
 import Foundation
-import AVFoundation
+@preconcurrency import AVFoundation
 import Speech
 import OSLog
 
@@ -12,17 +12,17 @@ struct LiveSegment: Identifiable, Equatable {
     var isFinal: Bool
 }
 
-protocol Transcribing: AnyObject {
+protocol Transcribing: AnyObject, Sendable {
     func requestAuthorization() async -> Bool
     /// Ensure the on-device speech model for the locale is installed, downloading it if needed.
     /// `progress` reports the download fraction (0...1) on an arbitrary thread.
-    func ensureModel(locale: String, progress: @escaping (Double) -> Void) async throws
+    func ensureModel(locale: String, progress: @escaping @Sendable (Double) -> Void) async throws
     /// Begin a streaming on-device recognition session for the given BCP-47 locale.
-    func start(locale: String, startOffset: @escaping () -> TimeInterval) async throws
+    func start(locale: String, startOffset: @escaping @Sendable () -> TimeInterval) async throws
     func append(_ buffer: AVAudioPCMBuffer)
     func stop()
     /// Emits partial (volatile) + final segments as they arrive.
-    var onSegment: ((LiveSegment) -> Void)? { get set }
+    var onSegment: (@Sendable (LiveSegment) -> Void)? { get set }
 }
 
 /// On-device transcription built on the macOS 26 `SpeechAnalyzer` API. Audio buffers are fed into
@@ -30,7 +30,7 @@ protocol Transcribing: AnyObject {
 /// results continuously — no manual session restart. The locale's recognition model is downloaded
 /// on demand via `AssetInventory`.
 final class TranscriptionService: NSObject, Transcribing, @unchecked Sendable {
-    var onSegment: ((LiveSegment) -> Void)?
+    var onSegment: (@Sendable (LiveSegment) -> Void)?
 
     private var analyzer: SpeechAnalyzer?
     private var transcriber: SpeechTranscriber?
@@ -54,7 +54,7 @@ final class TranscriptionService: NSObject, Transcribing, @unchecked Sendable {
         a.identifier(.bcp47) == b.identifier(.bcp47)
     }
 
-    func ensureModel(locale: String, progress: @escaping (Double) -> Void) async throws {
+    func ensureModel(locale: String, progress: @escaping @Sendable (Double) -> Void) async throws {
         let loc = Locale(identifier: locale)
 
         let supported = await SpeechTranscriber.supportedLocales
@@ -85,7 +85,7 @@ final class TranscriptionService: NSObject, Transcribing, @unchecked Sendable {
         tlog.notice("model installed locale=\(locale, privacy: .public)")
     }
 
-    func start(locale: String, startOffset: @escaping () -> TimeInterval) async throws {
+    func start(locale: String, startOffset: @escaping @Sendable () -> TimeInterval) async throws {
         let loc = Locale(identifier: locale)
         let transcriber = SpeechTranscriber(locale: loc, preset: .progressiveTranscription)
         self.transcriber = transcriber
@@ -141,7 +141,7 @@ final class TranscriptionService: NSObject, Transcribing, @unchecked Sendable {
         let ratio = analyzerFormat.sampleRate / input.format.sampleRate
         let capacity = AVAudioFrameCount(Double(input.frameLength) * ratio) + 1024
         guard let output = AVAudioPCMBuffer(pcmFormat: analyzerFormat, frameCapacity: capacity) else { return nil }
-        var fed = false
+        nonisolated(unsafe) var fed = false
         var error: NSError?
         converter.convert(to: output, error: &error) { _, status in
             if fed { status.pointee = .noDataNow; return nil }
