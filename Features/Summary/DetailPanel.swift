@@ -2,6 +2,7 @@ import SwiftUI
 
 /// Right-hand details panel for a meeting. (.pen: Resumo, right column)
 struct DetailPanel: View {
+    @Environment(AppState.self) private var appState
     let meeting: Meeting
 
     var body: some View {
@@ -49,7 +50,7 @@ struct DetailPanel: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
                 Image("Glyph").resizable().scaledToFit().frame(width: 16, height: 16)
-                Text(meeting.summaryModel ?? "GPT-4o").font(AurisFont.ui(13, .semibold)).foregroundStyle(AurisColor.textPrimary)
+                Text(meeting.summaryModel ?? appState.summaryModel).font(AurisFont.ui(13, .semibold)).foregroundStyle(AurisColor.textPrimary)
             }
             Text(meeting.summaryLanguage.uppercased())
                 .font(AurisFont.mono(11)).foregroundStyle(AurisColor.textMuted)

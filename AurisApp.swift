@@ -1,9 +1,14 @@
 import SwiftUI
 import SwiftData
+import OSLog
 
 @main
 struct AurisApp: App {
     @State private var appState = AppState()
+
+    init() {
+        Logger(subsystem: "com.bazzi.auris", category: "app").notice("Auris launched build=\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "?", privacy: .public)")
+    }
 
     let container: ModelContainer = {
         let schema = Schema([Meeting.self, TranscriptSegment.self, Speaker.self, Attachment.self, Tag.self])

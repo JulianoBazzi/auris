@@ -4,6 +4,26 @@ import SwiftData
 import Observation
 import AVFoundation
 
+/// A volatile (in-progress) utterance for one stream, anchored at the time it began.
+struct LiveTurn: Identifiable, Equatable {
+    let id: String          // stable per stream ("live-mic" / "live-system") for in-place updates
+    var startTime: TimeInterval
+    var text: String
+    var speakerName: String
+    var colorHex: String
+}
+
+/// One row in the live transcript timeline — a committed segment or a live partial.
+struct TimelineItem: Identifiable {
+    let id: String
+    let startTime: TimeInterval
+    let speakerName: String
+    let colorHex: String
+    let text: String
+    let timestamp: String
+    let isLive: Bool
+}
+
 @MainActor
 @Observable
 final class RecordingViewModel {
@@ -12,7 +32,9 @@ final class RecordingViewModel {
     var phase: Phase = .idle
     var elapsed: TimeInterval = 0
     var level: Float = 0
-    var liveText: String = ""
+    /// In-progress (volatile) utterance for each stream, shown live in chronological position.
+    var liveMic: LiveTurn?
+    var liveSystem: LiveTurn?
     var segments: [TranscriptSegment] = []
     var participants: [String] = []
     var pendingImages: [Data] = []
@@ -22,6 +44,10 @@ final class RecordingViewModel {
     var summaryFailed = false
     /// Set when system-audio (Screen Recording) capture was denied — drives the restart banner.
     var systemCaptureDenied = false
+    /// True while the on-device speech model for the chosen language is downloading.
+    var downloadingModel = false
+    /// Download progress (0...1) of the speech model, shown while `downloadingModel` is true.
+    var modelDownloadProgress: Double = 0
     /// AI metadata suggestion computed after recording stops (drives AISuggestionsSheet).
     var suggestion: MeetingSuggestion?
     /// The meeting persisted when recording stops, awaiting suggestion + summary.
@@ -59,6 +85,28 @@ final class RecordingViewModel {
         selfSpeakerName.isEmpty ? String(localized: "Me") : selfSpeakerName
     }
 
+    /// Committed segments + the live partials, merged in chronological order (a real conversation).
+    var timeline: [TimelineItem] {
+        var items = segments.map {
+            TimelineItem(id: $0.id.uuidString, startTime: $0.startTime, speakerName: $0.speakerName,
+                         colorHex: $0.speakerColorHex, text: $0.text, timestamp: $0.timestamp, isLive: false)
+        }
+        for turn in [liveMic, liveSystem].compactMap({ $0 }) where !turn.text.isEmpty {
+            let t = Int(turn.startTime)
+            items.append(TimelineItem(id: turn.id, startTime: turn.startTime, speakerName: turn.speakerName,
+                                      colorHex: turn.colorHex, text: turn.text,
+                                      timestamp: String(format: "%02d:%02d", t / 60, t % 60), isLive: true))
+        }
+        return items.sorted { $0.startTime < $1.startTime }
+    }
+
+    /// Inserts a final segment keeping `segments` ordered by start time, so the live
+    /// transcript stays chronological as mic + system finals interleave.
+    private func insertSegment(_ seg: TranscriptSegment) {
+        let idx = segments.firstIndex { $0.startTime > seg.startTime } ?? segments.count
+        segments.insert(seg, at: idx)
+    }
+
     var formattedElapsed: String {
         let t = Int(elapsed)
         return String(format: "%02d:%02d:%02d", t / 3600, (t % 3600) / 60, t % 60)
@@ -86,6 +134,23 @@ final class RecordingViewModel {
             errorMessage = String(localized: "Speech recognition not authorized.")
             return
         }
+
+        // Ensure the on-device model for the chosen language is installed, downloading if needed.
+        // Mic and system streams share the locale, so one check covers both.
+        do {
+            downloadingModel = true
+            modelDownloadProgress = 0
+            try await transcriber.ensureModel(locale: locale) { [weak self] p in
+                Task { @MainActor in self?.modelDownloadProgress = p }
+            }
+            downloadingModel = false
+        } catch {
+            downloadingModel = false
+            errorMessage = error.localizedDescription
+            phase = .idle
+            return
+        }
+
         let name = RecordingStore.newRecordingFileName()
         fileName = name
 
@@ -106,10 +171,9 @@ final class RecordingViewModel {
         }
 
         do {
-            try transcriber.start(locale: locale, startOffset: { [weak self] in self?.elapsed ?? 0 })
-            // System-audio transcription is best-effort (second recognizer).
+            try await transcriber.start(locale: locale, startOffset: { [weak self] in self?.elapsed ?? 0 })
             if transcribeSystem {
-                try? systemTranscriber.start(locale: locale, startOffset: { [weak self] in self?.elapsed ?? 0 })
+                try? await systemTranscriber.start(locale: locale, startOffset: { [weak self] in self?.elapsed ?? 0 })
             }
             try await audio.start(captureMic: captureMic, captureSystem: captureSystem, fileName: name)
             startDate = Date()
@@ -124,23 +188,35 @@ final class RecordingViewModel {
         }
     }
 
-    /// Microphone speech → labeled with the user's name; drives the live partial row.
+    /// Microphone speech → labeled with the user's name. Live partials show in place; finals commit.
     private func ingestMic(_ seg: LiveSegment) {
-        liveText = seg.text
-        guard seg.isFinal, !seg.text.isEmpty else { return }
-        segments.append(TranscriptSegment(
-            startTime: seg.startTime, text: seg.text, speakerName: micSpeaker, speakerColorHex: "#60A5FA"
-        ))
-        liveText = ""
+        if seg.isFinal {
+            if !seg.text.isEmpty {
+                insertSegment(TranscriptSegment(
+                    startTime: seg.startTime, text: seg.text, speakerName: micSpeaker, speakerColorHex: "#60A5FA"
+                ))
+            }
+            liveMic = nil
+        } else {
+            liveMic = LiveTurn(id: "live-mic", startTime: seg.startTime, text: seg.text,
+                               speakerName: micSpeaker, colorHex: "#60A5FA")
+        }
     }
 
-    /// System audio (remote participants) → labeled "Guest"; final segments only.
+    /// System audio (remote participants) → labeled "Guest". Live partials show in place; finals commit.
     private func ingestSystem(_ seg: LiveSegment) {
-        guard seg.isFinal, !seg.text.isEmpty else { return }
-        segments.append(TranscriptSegment(
-            startTime: seg.startTime, text: seg.text,
-            speakerName: String(localized: "Guest"), speakerColorHex: "#B07CF6"
-        ))
+        if seg.isFinal {
+            if !seg.text.isEmpty {
+                insertSegment(TranscriptSegment(
+                    startTime: seg.startTime, text: seg.text,
+                    speakerName: String(localized: "Guest"), speakerColorHex: "#B07CF6"
+                ))
+            }
+            liveSystem = nil
+        } else {
+            liveSystem = LiveTurn(id: "live-system", startTime: seg.startTime, text: seg.text,
+                                  speakerName: String(localized: "Guest"), colorHex: "#B07CF6")
+        }
     }
 
     func pause() {
@@ -178,9 +254,15 @@ final class RecordingViewModel {
         // Give the recognizer a moment to deliver its last final result, then flush any
         // remaining partial so the tail of the conversation isn't lost.
         try? await Task.sleep(nanoseconds: 350_000_000)
-        if !liveText.isEmpty {
-            segments.append(TranscriptSegment(startTime: elapsed, text: liveText, speakerName: micSpeaker, speakerColorHex: "#60A5FA"))
-            liveText = ""
+        if let turn = liveMic, !turn.text.isEmpty {
+            insertSegment(TranscriptSegment(startTime: turn.startTime, text: turn.text,
+                                            speakerName: micSpeaker, speakerColorHex: "#60A5FA"))
+            liveMic = nil
+        }
+        if let turn = liveSystem, !turn.text.isEmpty {
+            insertSegment(TranscriptSegment(startTime: turn.startTime, text: turn.text,
+                                            speakerName: String(localized: "Guest"), speakerColorHex: "#B07CF6"))
+            liveSystem = nil
         }
         segments.sort { $0.startTime < $1.startTime }
 
@@ -270,7 +352,7 @@ final class RecordingViewModel {
 
     func reset() {
         phase = .idle
-        elapsed = 0; level = 0; liveText = ""
+        elapsed = 0; level = 0; liveMic = nil; liveSystem = nil
         segments = []; participants = []; pendingImages = []
         errorMessage = nil; summaryFailed = false; systemCaptureDenied = false
         suggestion = nil; pendingMeeting = nil

@@ -47,7 +47,8 @@ struct RecordingView: View {
             }
         }
         .overlay {
-            if recorder.phase == .summarizing { summarizingOverlay }
+            if recorder.downloadingModel { downloadingOverlay }
+            else if recorder.phase == .summarizing { summarizingOverlay }
             else if recorder.summaryFailed { summaryFailedOverlay }
         }
     }
@@ -144,31 +145,23 @@ struct RecordingView: View {
                             .buttonStyle(.plain)
                         }
                     }
-                    ForEach(recorder.segments) { seg in
+                    ForEach(recorder.timeline) { item in
                         TranscriptRow(
-                            speakerName: seg.speakerName,
-                            timestamp: seg.timestamp,
-                            text: seg.text,
-                            accent: Color(hex: seg.speakerColorHex)
+                            speakerName: item.speakerName,
+                            timestamp: item.timestamp,
+                            text: item.text,
+                            accent: Color(hex: item.colorHex)
                         )
-                        .id(seg.id)
-                    }
-                    if !recorder.liveText.isEmpty {
-                        TranscriptRow(
-                            speakerName: recorder.micSpeaker,
-                            timestamp: "…",
-                            text: recorder.liveText
-                        )
-                        .opacity(0.6)
-                        .id("live")
+                        .opacity(item.isLive ? 0.6 : 1)
+                        .id(item.id)
                     }
                     if !recorder.pendingImages.isEmpty { attachmentStrip }
                 }
                 .padding(28)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .onChange(of: recorder.segments.count) {
-                withAnimation { proxy.scrollTo(recorder.segments.last?.id, anchor: .bottom) }
+            .onChange(of: recorder.timeline.count) {
+                withAnimation { proxy.scrollTo(recorder.timeline.last?.id, anchor: .bottom) }
             }
         }
     }
@@ -239,6 +232,28 @@ struct RecordingView: View {
         .padding(.vertical, 8).padding(.horizontal, 14)
         .background(AurisColor.bgElevated, in: Capsule())
         .overlay(Capsule().stroke(AurisColor.border, lineWidth: 1))
+    }
+
+    private var downloadingOverlay: some View {
+        ZStack {
+            AurisColor.bgWindow.opacity(0.78).ignoresSafeArea()
+            VStack(spacing: 14) {
+                ProgressView(value: recorder.modelDownloadProgress)
+                    .progressViewStyle(.linear)
+                    .frame(width: 220)
+                Text("Downloading transcription model…")
+                    .font(AurisFont.ui(15, .semibold))
+                    .foregroundStyle(AurisColor.textPrimary)
+                Text("One-time download for the selected language. This may take a moment.")
+                    .font(AurisFont.ui(12))
+                    .foregroundStyle(AurisColor.textSecondary)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: 280)
+            }
+            .padding(30)
+            .background(AurisColor.bgElevated, in: RoundedRectangle(cornerRadius: 16))
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(AurisColor.border, lineWidth: 1))
+        }
     }
 
     private var summarizingOverlay: some View {

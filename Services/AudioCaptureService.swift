@@ -1,6 +1,9 @@
 import Foundation
 import AVFoundation
 import ScreenCaptureKit
+import OSLog
+
+private let alog = Logger(subsystem: "com.bazzi.auris", category: "audio")
 
 enum CaptureState: Equatable {
     case idle, recording, paused, finished
@@ -38,6 +41,8 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
     /// mixer) and mute the main mixer's output, so the recording captures everything while
     /// nothing is monitored back through the speakers (no echo / feedback).
     private let captureMixer = AVAudioMixerNode()
+    /// Mic-only sub-mixer we tap for clean speech (the inputNode tap is unreliable in this graph).
+    private let micMixer = AVAudioMixerNode()
     private var stream: SCStream?
     private var audioFile: AVAudioFile?
     private var outputURL: URL?
@@ -47,6 +52,8 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
     /// Mono format used to feed system audio to its own speech-recognition stream.
     private let monoFormat = AVAudioFormat(standardFormatWithSampleRate: 48_000, channels: 1)!
     private var monoConverter: AVAudioConverter?
+    private var micMonoConverter: AVAudioConverter?
+    private var sysBufferCount = 0
 
     func start(captureMic: Bool, captureSystem: Bool, fileName: String) async throws {
         let url = RecordingStore.recordingURL(named: fileName)
@@ -65,18 +72,18 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
                           userInfo: [NSLocalizedDescriptionKey: "No valid audio output format available."])
         }
 
-        // Build the graph BEFORE installing the tap so the mixer has a valid output format.
-        // mic + systemPlayer -> captureMixer (tapped) -> mainMixer (muted output).
+        // Graph: mic -> micMixer -> captureMixer ; systemPlayer -> captureMixer -> mainMixer (muted).
+        // We tap micMixer for CLEAN mic-only transcription, the SCStream buffers for CLEAN system
+        // transcription, and captureMixer for the mixed FILE + waveform. Separate speech streams
+        // avoid the music/voice mixing that produced empty transcripts.
         engine.attach(systemPlayer)
         engine.attach(captureMixer)
+        engine.attach(micMixer)
         engine.connect(systemPlayer, to: captureMixer, format: sysFormat)
         if hasMic {
-            engine.connect(input, to: captureMixer, format: micFormat)
+            engine.connect(input, to: micMixer, format: micFormat)
+            engine.connect(micMixer, to: captureMixer, format: tapFormat)
         }
-        // The captureMixer must still reach an output node for the graph to render, but we mute
-        // the main mixer so the user never hears their own mic / the system audio (no echo).
-        // Connect with the explicit processing format so the mixer's output bus is well-defined
-        // and the tap below always matches it.
         engine.connect(captureMixer, to: mainMixer, format: tapFormat)
         mainMixer.outputVolume = 0
         engine.prepare()
@@ -91,7 +98,7 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
             ]
         )
 
-        // Tap the capture mixer for the FILE (mic + system mixed) and the waveform level.
+        // Tap captureMixer for the FILE (mic + system mixed) and the waveform level.
         captureMixer.installTap(onBus: 0, bufferSize: 4096, format: tapFormat) { [weak self] buffer, _ in
             guard let self else { return }
             self.writeQueue.async { try? self.audioFile?.write(from: buffer) }
@@ -99,13 +106,14 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
             DispatchQueue.main.async { self.onLevel?(level) }
         }
 
-        // Tap the mic input directly in its native (mono) format for transcription. Feeding the
-        // recognizer the stereo mixer buffer makes SFSpeech fail silently; the raw mic buffer works.
+        // Tap micMixer for clean mic-only audio fed to the mic recognizer (mono downmix).
         if hasMic {
-            input.installTap(onBus: 0, bufferSize: 4096, format: micFormat) { [weak self] buffer, _ in
-                self?.onBuffer?(buffer)
+            micMixer.installTap(onBus: 0, bufferSize: 4096, format: tapFormat) { [weak self] buffer, _ in
+                guard let self else { return }
+                if let mono = self.monoBuffer(buffer, &self.micMonoConverter) { self.onBuffer?(mono) }
             }
         }
+        alog.notice("graph built hasMic=\(hasMic) tap sr=\(tapFormat.sampleRate) ch=\(tapFormat.channelCount)")
 
         try engine.start()
         systemPlayer.play()
@@ -115,7 +123,9 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
         if captureSystem {
             do {
                 try await startSystemCapture()
+                alog.notice("system capture started")
             } catch {
+                alog.error("system capture failed: \(error.localizedDescription, privacy: .public)")
                 onSystemCaptureError?(error)
             }
         }
@@ -125,7 +135,10 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
 
     private func startSystemCapture() async throws {
         let content = try await SCShareableContent.excludingDesktopWindows(false, onScreenWindowsOnly: true)
-        guard let display = content.displays.first else { return }
+        guard let display = content.displays.first else {
+            alog.error("system capture: no display available")
+            return
+        }
         let filter = SCContentFilter(display: display, excludingApplications: [], exceptingWindows: [])
 
         let config = SCStreamConfiguration()
@@ -159,12 +172,13 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
         if let stream { try? await stream.stopCapture() }
         stream = nil
         captureMixer.removeTap(onBus: 0)
-        engine.inputNode.removeTap(onBus: 0)
+        micMixer.removeTap(onBus: 0)
         systemPlayer.stop()
         engine.stop()
         audioFile = nil
         sysConverter = nil
         monoConverter = nil
+        micMonoConverter = nil
         state = .finished
         return outputURL
     }
@@ -172,8 +186,12 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
     // MARK: - SCStreamOutput
 
     func stream(_ stream: SCStream, didOutputSampleBuffer sampleBuffer: CMSampleBuffer, of type: SCStreamOutputType) {
-        guard type == .audio,
-              let pcm = Self.pcmBuffer(from: sampleBuffer),
+        guard type == .audio else { return }
+        sysBufferCount += 1
+        if sysBufferCount == 1 || sysBufferCount % 200 == 0 {
+            alog.notice("system buffer #\(self.sysBufferCount) engineRunning=\(self.engine.isRunning) playerAttached=\(self.systemPlayer.engine != nil)")
+        }
+        guard let pcm = Self.pcmBuffer(from: sampleBuffer),
               engine.isRunning, systemPlayer.engine != nil else { return }
 
         // The player node expects `sysFormat`; the incoming format may differ (sample rate,
@@ -181,15 +199,19 @@ final class AudioCaptureService: NSObject, AudioCapturing, SCStreamOutput, SCStr
         guard let converted = convertToSysFormat(pcm) else { return }
         systemPlayer.scheduleBuffer(converted, completionHandler: nil)
 
-        // Feed a mono copy to the system-audio transcription stream.
-        if let mono = convertToMono(pcm) { onSystemBuffer?(mono) }
+        // Clean system-audio mono feed for the system recognizer.
+        if let mono = monoBuffer(pcm, &monoConverter) { onSystemBuffer?(mono) }
     }
 
-    private func convertToMono(_ input: AVAudioPCMBuffer) -> AVAudioPCMBuffer? {
-        if monoConverter == nil || monoConverter?.inputFormat != input.format {
-            monoConverter = AVAudioConverter(from: input.format, to: monoFormat)
+    func stream(_ stream: SCStream, didStopWithError error: Error) {
+        alog.error("SCStream stopped: \(error.localizedDescription, privacy: .public)")
+    }
+
+    private func monoBuffer(_ input: AVAudioPCMBuffer, _ converter: inout AVAudioConverter?) -> AVAudioPCMBuffer? {
+        if converter == nil || converter?.inputFormat != input.format {
+            converter = AVAudioConverter(from: input.format, to: monoFormat)
         }
-        guard let converter = monoConverter else { return nil }
+        guard let converter else { return nil }
         let ratio = monoFormat.sampleRate / input.format.sampleRate
         let capacity = AVAudioFrameCount(Double(input.frameLength) * ratio) + 1024
         guard let output = AVAudioPCMBuffer(pcmFormat: monoFormat, frameCapacity: capacity) else { return nil }
