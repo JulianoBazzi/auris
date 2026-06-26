@@ -1,58 +1,72 @@
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
-	classes = {};
+	classes = {
+	};
 	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		59537261840BA702BCA235A9 /* AurisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE67FC9CC92B8CA5E4A2090 /* AurisApp.swift */; };
-		6F883C73CD1B9601604B2005 /* Chip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EC534E45F546342F959D05 /* Chip.swift */; };
 		0D82D5861B3CA92AD5DFD22A /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D0776BAD7EF01D78DD66E /* ControlButton.swift */; };
-		372188BB025FC995C5CEED41 /* SidebarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57947725D155BFC37A2E4C7B /* SidebarItem.swift */; };
-		B02B6713EE1E99FF70E6C46C /* StatusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4D937526EA647F8D4EEE36 /* StatusCard.swift */; };
-		6909BC48A8AC3EB845452BF4 /* TitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD8CFDD656F55DD2D0B04A /* TitleBar.swift */; };
-		3E4BF2CB575DBDB5F9900540 /* TranscriptRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC3F62387FD22459CD04E86 /* TranscriptRow.swift */; };
-		AB497063267163E67B1DC16F /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0E1B9EC28BC46833199B4 /* Theme.swift */; };
-		5E2C10EAFF9C7DD25196BC35 /* IdleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A3E7745F13D95BBCD13892 /* IdleView.swift */; };
-		C90F332EDA728681EDC53196 /* DeleteMeetingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A6ECD474F77F099D5106EA /* DeleteMeetingSheet.swift */; };
-		29447BACC12EA465546FBC0C /* RootSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B4084D2753D27740E745C8 /* RootSplitView.swift */; };
-		C3DD3286196847C9825192DF /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6EE59AD8C5E911B1D3CF71 /* SidebarView.swift */; };
-		E7FCD1F5751B7330553B4889 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E204FAE1A8CFD7BA5604DDD /* MenuBarView.swift */; };
-		D16DEAC5B1BDB1268D4EC39E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6076E6DFBC6930AA670C8C9 /* OnboardingView.swift */; };
-		4B6D9AA26C9DC6FC8123F04C /* AISuggestionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB1C3BF0F0DDDA740C659DC /* AISuggestionsSheet.swift */; };
-		15214DD7AA827EFF9AA10A0C /* ConsentSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9D62E575407E9C8395B71C /* ConsentSheet.swift */; };
-		84B2C53F99550F3D0BF4AF56 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60A68A0849885CD92FB5F6 /* RecordingView.swift */; };
-		A08E65DEE8501616FDB8018F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4599AA9375712E54A80C71 /* SettingsView.swift */; };
-		17F96F452BBB744876B72B6D /* DetailPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE3E67E3E0B6A0737564AB /* DetailPanel.swift */; };
-		A794F233493162D1BE2616A7 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BBC406EB5DA4CD0197A0D8 /* SummaryView.swift */; };
-		6EB019414FC1882B2D77A5D8 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0278F9F51BE3DBFBE76B4 /* Attachment.swift */; };
-		5EC25310B2A9C1CB7DD32F4C /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F7B52DF931332AAC1D61C /* Meeting.swift */; };
-		B30AE8786F36EEE2D6B8EBBA /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2997A437BF4EC5D4A67318EC /* Tag.swift */; };
-		8E549648A381F9955A46E54B /* TranscriptSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BED3EA0899063EF3918AA7 /* TranscriptSegment.swift */; };
-		D541351A686BDC08DB43528C /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A653FA3E8BFDCC73AA92AA85 /* AppGroup.swift */; };
-		EAD55DB20A5E62EC7C127243 /* AppRelaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0483E0CD4646D0D4A109AB3B /* AppRelaunch.swift */; };
-		B9F3C1E97A7428A66338C393 /* AudioCaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D92741D3F240B38EE057C6 /* AudioCaptureService.swift */; };
-		67DA1ABEC35CE34D62B3767C /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC029ACA82DADF7F3FE1C6 /* KeychainStore.swift */; };
-		E6B4FBA2E0F95C5DD9C8720B /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E3773B3239B41A880D8D9 /* RecordingStore.swift */; };
-		C795EBE236AA36BBA66965DF /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C260A9348DE8438174C9E /* SharedStore.swift */; };
-		C353C14BE53811667EA0397B /* SummarizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C3931810A4F8C3754C9A7E /* SummarizationService.swift */; };
-		430EF8EAA1DB99079D663A1F /* TranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93786700DC840E2936FD5AAD /* TranscriptionService.swift */; };
-		A71686B63B66424F11590E4E /* UsageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC72B020E410FED982BB02E5 /* UsageStore.swift */; };
 		123CB9F4092A1B1E92BA1B14 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F770060ABFE1BFF6C43838 /* WidgetSnapshot.swift */; };
-		844CCB0045D47016CD9DE18B /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1387BA268FBA995ABFC64C /* AppState.swift */; };
-		AC6CB76E90A2D32F20F31799 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3211C66C79E88AE23B627C6B /* LibraryViewModel.swift */; };
-		FB3DEE59448E0CC1E6A7B0AE /* RecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A9D9FB3CA84319568CBB62 /* RecordingViewModel.swift */; };
+		15214DD7AA827EFF9AA10A0C /* ConsentSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9D62E575407E9C8395B71C /* ConsentSheet.swift */; };
+		17F96F452BBB744876B72B6D /* DetailPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE3E67E3E0B6A0737564AB /* DetailPanel.swift */; };
 		2347D7988F701F2E82D26C2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B04B2273026590A440D27C9 /* Assets.xcassets */; };
-		DEFC60AB8641442656B4A670 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1D0D1BEDF1A3D6E5DD573FEF /* Localizable.xcstrings */; };
-		9F69B890EA671E93C5639476 /* AurisWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D9EFEB6B7544C89D281C5 /* AurisWidget.swift */; };
+		29447BACC12EA465546FBC0C /* RootSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B4084D2753D27740E745C8 /* RootSplitView.swift */; };
+		372188BB025FC995C5CEED41 /* SidebarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57947725D155BFC37A2E4C7B /* SidebarItem.swift */; };
+		3E4BF2CB575DBDB5F9900540 /* TranscriptRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC3F62387FD22459CD04E86 /* TranscriptRow.swift */; };
+		430EF8EAA1DB99079D663A1F /* TranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93786700DC840E2936FD5AAD /* TranscriptionService.swift */; };
+		4B6D9AA26C9DC6FC8123F04C /* AISuggestionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB1C3BF0F0DDDA740C659DC /* AISuggestionsSheet.swift */; };
+		59537261840BA702BCA235A9 /* AurisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE67FC9CC92B8CA5E4A2090 /* AurisApp.swift */; };
+		5E2C10EAFF9C7DD25196BC35 /* IdleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A3E7745F13D95BBCD13892 /* IdleView.swift */; };
+		5EC25310B2A9C1CB7DD32F4C /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F7B52DF931332AAC1D61C /* Meeting.swift */; };
+		61233FB187662048E27ED1E2 /* AppStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76590EF5E01686F7D3C83D82 /* AppStateTests.swift */; };
+		67DA1ABEC35CE34D62B3767C /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAC029ACA82DADF7F3FE1C6 /* KeychainStore.swift */; };
+		6909BC48A8AC3EB845452BF4 /* TitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD8CFDD656F55DD2D0B04A /* TitleBar.swift */; };
 		6BAC5FC6194E75421541FD07 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0E1B9EC28BC46833199B4 /* Theme.swift */; };
-		8EE85A9A707552E1334343D8 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A653FA3E8BFDCC73AA92AA85 /* AppGroup.swift */; };
+		6C73AC71638141460ABB6912 /* RecordingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40B5F0D3B54CE7CA6B59186 /* RecordingViewModelTests.swift */; };
+		6EB019414FC1882B2D77A5D8 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0278F9F51BE3DBFBE76B4 /* Attachment.swift */; };
 		6EE681427DB7D8B1B6EA7526 /* WidgetSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F770060ABFE1BFF6C43838 /* WidgetSnapshot.swift */; };
+		6F883C73CD1B9601604B2005 /* Chip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EC534E45F546342F959D05 /* Chip.swift */; };
+		78C447DD90F88748B58FF361 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C90A64E3105C158AE81BC9F /* Cocoa.framework */; };
+		844CCB0045D47016CD9DE18B /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1387BA268FBA995ABFC64C /* AppState.swift */; };
+		84B2C53F99550F3D0BF4AF56 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60A68A0849885CD92FB5F6 /* RecordingView.swift */; };
+		87E850326D624536E83DFC45 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E11484433D25F0A73AB343 /* Mocks.swift */; };
+		8E549648A381F9955A46E54B /* TranscriptSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BED3EA0899063EF3918AA7 /* TranscriptSegment.swift */; };
+		8EE85A9A707552E1334343D8 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A653FA3E8BFDCC73AA92AA85 /* AppGroup.swift */; };
+		9F69B890EA671E93C5639476 /* AurisWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D9EFEB6B7544C89D281C5 /* AurisWidget.swift */; };
+		A08E65DEE8501616FDB8018F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4599AA9375712E54A80C71 /* SettingsView.swift */; };
+		A71686B63B66424F11590E4E /* UsageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC72B020E410FED982BB02E5 /* UsageStore.swift */; };
+		A794F233493162D1BE2616A7 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BBC406EB5DA4CD0197A0D8 /* SummaryView.swift */; };
+		AB497063267163E67B1DC16F /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD0E1B9EC28BC46833199B4 /* Theme.swift */; };
+		AC6CB76E90A2D32F20F31799 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3211C66C79E88AE23B627C6B /* LibraryViewModel.swift */; };
+		B02B6713EE1E99FF70E6C46C /* StatusCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4D937526EA647F8D4EEE36 /* StatusCard.swift */; };
+		B30AE8786F36EEE2D6B8EBBA /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2997A437BF4EC5D4A67318EC /* Tag.swift */; };
+		B9F3C1E97A7428A66338C393 /* AudioCaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D92741D3F240B38EE057C6 /* AudioCaptureService.swift */; };
+		BC02FAAB8A1CB73E4DAE2615 /* PureLogicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70EA5485D09705F0FFBD676 /* PureLogicTests.swift */; };
 		C1CE97119249A1F47494E3DA /* AurisWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 16E753E2B59F1D242D278C57 /* AurisWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C353C14BE53811667EA0397B /* SummarizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C3931810A4F8C3754C9A7E /* SummarizationService.swift */; };
+		C3DD3286196847C9825192DF /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6EE59AD8C5E911B1D3CF71 /* SidebarView.swift */; };
+		C795EBE236AA36BBA66965DF /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727C260A9348DE8438174C9E /* SharedStore.swift */; };
+		C90F332EDA728681EDC53196 /* DeleteMeetingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A6ECD474F77F099D5106EA /* DeleteMeetingSheet.swift */; };
+		D16DEAC5B1BDB1268D4EC39E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6076E6DFBC6930AA670C8C9 /* OnboardingView.swift */; };
+		D541351A686BDC08DB43528C /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A653FA3E8BFDCC73AA92AA85 /* AppGroup.swift */; };
+		DC00E19EBC1C542890B93258 /* SummarizationHeuristicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45C0E987622A36D9B83CB64 /* SummarizationHeuristicTests.swift */; };
+		DEFC60AB8641442656B4A670 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1D0D1BEDF1A3D6E5DD573FEF /* Localizable.xcstrings */; };
+		E6B4FBA2E0F95C5DD9C8720B /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630E3773B3239B41A880D8D9 /* RecordingStore.swift */; };
+		E7FCD1F5751B7330553B4889 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E204FAE1A8CFD7BA5604DDD /* MenuBarView.swift */; };
+		EAD55DB20A5E62EC7C127243 /* AppRelaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0483E0CD4646D0D4A109AB3B /* AppRelaunch.swift */; };
+		FB3DEE59448E0CC1E6A7B0AE /* RecordingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A9D9FB3CA84319568CBB62 /* RecordingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		42219D0007BE52B1C2CACB9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 16096466A0C94E7EBDCD0656;
+			remoteInfo = Auris;
+		};
 		8701BB2B02FE1CE5DDDD47A4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 98F54143AB4E86B28C3AFEE0 /* Project object */;
@@ -77,54 +91,61 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4F5E0F02997B67B141C09824 /* Auris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Auris.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		00B4084D2753D27740E745C8 /* RootSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSplitView.swift; sourceTree = "<group>"; };
+		0483E0CD4646D0D4A109AB3B /* AppRelaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRelaunch.swift; sourceTree = "<group>"; };
+		04D92741D3F240B38EE057C6 /* AudioCaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCaptureService.swift; sourceTree = "<group>"; };
+		0BB1C3BF0F0DDDA740C659DC /* AISuggestionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISuggestionsSheet.swift; sourceTree = "<group>"; };
+		0CD0E1B9EC28BC46833199B4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		1507F021100E808DBE2FAA00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		16BBC406EB5DA4CD0197A0D8 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		16E753E2B59F1D242D278C57 /* AurisWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AurisWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BE67FC9CC92B8CA5E4A2090 /* AurisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AurisApp.swift"; sourceTree = "<group>"; };
-		204D9EFEB6B7544C89D281C5 /* AurisWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AurisWidget.swift"; sourceTree = "<group>"; };
-		F2EC534E45F546342F959D05 /* Chip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chip.swift"; sourceTree = "<group>"; };
-		212D0776BAD7EF01D78DD66E /* ControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlButton.swift"; sourceTree = "<group>"; };
-		57947725D155BFC37A2E4C7B /* SidebarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarItem.swift"; sourceTree = "<group>"; };
-		8E4D937526EA647F8D4EEE36 /* StatusCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusCard.swift"; sourceTree = "<group>"; };
-		1EFD8CFDD656F55DD2D0B04A /* TitleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TitleBar.swift"; sourceTree = "<group>"; };
-		FBC3F62387FD22459CD04E86 /* TranscriptRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranscriptRow.swift"; sourceTree = "<group>"; };
-		0CD0E1B9EC28BC46833199B4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme.swift"; sourceTree = "<group>"; };
-		B9A3E7745F13D95BBCD13892 /* IdleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdleView.swift"; sourceTree = "<group>"; };
-		D1A6ECD474F77F099D5106EA /* DeleteMeetingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeleteMeetingSheet.swift"; sourceTree = "<group>"; };
-		00B4084D2753D27740E745C8 /* RootSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootSplitView.swift"; sourceTree = "<group>"; };
-		5D6EE59AD8C5E911B1D3CF71 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarView.swift"; sourceTree = "<group>"; };
-		3E204FAE1A8CFD7BA5604DDD /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuBarView.swift"; sourceTree = "<group>"; };
-		E6076E6DFBC6930AA670C8C9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OnboardingView.swift"; sourceTree = "<group>"; };
-		0BB1C3BF0F0DDDA740C659DC /* AISuggestionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AISuggestionsSheet.swift"; sourceTree = "<group>"; };
-		4E9D62E575407E9C8395B71C /* ConsentSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConsentSheet.swift"; sourceTree = "<group>"; };
-		4A60A68A0849885CD92FB5F6 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordingView.swift"; sourceTree = "<group>"; };
-		5C4599AA9375712E54A80C71 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView.swift"; sourceTree = "<group>"; };
-		E7CE3E67E3E0B6A0737564AB /* DetailPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailPanel.swift"; sourceTree = "<group>"; };
-		16BBC406EB5DA4CD0197A0D8 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SummaryView.swift"; sourceTree = "<group>"; };
-		AFA0278F9F51BE3DBFBE76B4 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attachment.swift"; sourceTree = "<group>"; };
-		A57F7B52DF931332AAC1D61C /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meeting.swift"; sourceTree = "<group>"; };
-		2997A437BF4EC5D4A67318EC /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag.swift"; sourceTree = "<group>"; };
-		48BED3EA0899063EF3918AA7 /* TranscriptSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranscriptSegment.swift"; sourceTree = "<group>"; };
-		A653FA3E8BFDCC73AA92AA85 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppGroup.swift"; sourceTree = "<group>"; };
-		0483E0CD4646D0D4A109AB3B /* AppRelaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppRelaunch.swift"; sourceTree = "<group>"; };
-		04D92741D3F240B38EE057C6 /* AudioCaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioCaptureService.swift"; sourceTree = "<group>"; };
-		7FAC029ACA82DADF7F3FE1C6 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeychainStore.swift"; sourceTree = "<group>"; };
-		630E3773B3239B41A880D8D9 /* RecordingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordingStore.swift"; sourceTree = "<group>"; };
-		727C260A9348DE8438174C9E /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedStore.swift"; sourceTree = "<group>"; };
-		C1C3931810A4F8C3754C9A7E /* SummarizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SummarizationService.swift"; sourceTree = "<group>"; };
-		93786700DC840E2936FD5AAD /* TranscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranscriptionService.swift"; sourceTree = "<group>"; };
-		EC72B020E410FED982BB02E5 /* UsageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsageStore.swift"; sourceTree = "<group>"; };
-		36F770060ABFE1BFF6C43838 /* WidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WidgetSnapshot.swift"; sourceTree = "<group>"; };
-		9E1387BA268FBA995ABFC64C /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppState.swift"; sourceTree = "<group>"; };
-		3211C66C79E88AE23B627C6B /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryViewModel.swift"; sourceTree = "<group>"; };
-		30A9D9FB3CA84319568CBB62 /* RecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordingViewModel.swift"; sourceTree = "<group>"; };
-		5B04B2273026590A440D27C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
-		1D0D1BEDF1A3D6E5DD573FEF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = "Localizable.xcstrings"; sourceTree = "<group>"; };
-		1507F021100E808DBE2FAA00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
-		DF7AE9F924D0E6FEE5C53529 /* Auris.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Auris.entitlements"; sourceTree = "<group>"; };
+		1A23D9697CE4D09E1806A018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1D0D1BEDF1A3D6E5DD573FEF /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		1EFD8CFDD656F55DD2D0B04A /* TitleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleBar.swift; sourceTree = "<group>"; };
+		204D9EFEB6B7544C89D281C5 /* AurisWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AurisWidget.swift; sourceTree = "<group>"; };
+		212D0776BAD7EF01D78DD66E /* ControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlButton.swift; sourceTree = "<group>"; };
+		2997A437BF4EC5D4A67318EC /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		30A9D9FB3CA84319568CBB62 /* RecordingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingViewModel.swift; sourceTree = "<group>"; };
+		3211C66C79E88AE23B627C6B /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
+		36F770060ABFE1BFF6C43838 /* WidgetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSnapshot.swift; sourceTree = "<group>"; };
+		3E204FAE1A8CFD7BA5604DDD /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		48BED3EA0899063EF3918AA7 /* TranscriptSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptSegment.swift; sourceTree = "<group>"; };
+		4A60A68A0849885CD92FB5F6 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
+		4E9D62E575407E9C8395B71C /* ConsentSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentSheet.swift; sourceTree = "<group>"; };
+		4F5E0F02997B67B141C09824 /* Auris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Auris.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		57947725D155BFC37A2E4C7B /* SidebarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarItem.swift; sourceTree = "<group>"; };
+		5B04B2273026590A440D27C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5C4599AA9375712E54A80C71 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		5D6EE59AD8C5E911B1D3CF71 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		630E3773B3239B41A880D8D9 /* RecordingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingStore.swift; sourceTree = "<group>"; };
+		727C260A9348DE8438174C9E /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
 		7550037AC7F18DC7870DCF72 /* Auris-Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Auris-Debug.entitlements"; sourceTree = "<group>"; };
-		1A23D9697CE4D09E1806A018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
-		FAD07A97D14D5808495B62C7 /* AurisWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AurisWidget.entitlements"; sourceTree = "<group>"; };
+		76590EF5E01686F7D3C83D82 /* AppStateTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppStateTests.swift; sourceTree = "<group>"; };
+		7C90A64E3105C158AE81BC9F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		7FAC029ACA82DADF7F3FE1C6 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		86D184914FB235CEE37CB96B /* AurisWidget-Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AurisWidget-Debug.entitlements"; sourceTree = "<group>"; };
+		8BE67FC9CC92B8CA5E4A2090 /* AurisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AurisApp.swift; sourceTree = "<group>"; };
+		8E4D937526EA647F8D4EEE36 /* StatusCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCard.swift; sourceTree = "<group>"; };
+		93786700DC840E2936FD5AAD /* TranscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionService.swift; sourceTree = "<group>"; };
+		9E1387BA268FBA995ABFC64C /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		A40B5F0D3B54CE7CA6B59186 /* RecordingViewModelTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RecordingViewModelTests.swift; sourceTree = "<group>"; };
+		A57F7B52DF931332AAC1D61C /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
+		A653FA3E8BFDCC73AA92AA85 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		A9E11484433D25F0A73AB343 /* Mocks.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
+		AFA0278F9F51BE3DBFBE76B4 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		B70EA5485D09705F0FFBD676 /* PureLogicTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PureLogicTests.swift; sourceTree = "<group>"; };
+		B9A3E7745F13D95BBCD13892 /* IdleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleView.swift; sourceTree = "<group>"; };
+		C1C3931810A4F8C3754C9A7E /* SummarizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizationService.swift; sourceTree = "<group>"; };
+		C45C0E987622A36D9B83CB64 /* SummarizationHeuristicTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SummarizationHeuristicTests.swift; sourceTree = "<group>"; };
+		D1A6ECD474F77F099D5106EA /* DeleteMeetingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMeetingSheet.swift; sourceTree = "<group>"; };
+		DF7AE9F924D0E6FEE5C53529 /* Auris.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Auris.entitlements; sourceTree = "<group>"; };
+		E6076E6DFBC6930AA670C8C9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		E7CE3E67E3E0B6A0737564AB /* DetailPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPanel.swift; sourceTree = "<group>"; };
+		EAAEAAADA4C3225096443F40 /* AurisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AurisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC72B020E410FED982BB02E5 /* UsageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageStore.swift; sourceTree = "<group>"; };
+		F2EC534E45F546342F959D05 /* Chip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chip.swift; sourceTree = "<group>"; };
+		FAD07A97D14D5808495B62C7 /* AurisWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AurisWidget.entitlements; sourceTree = "<group>"; };
+		FBC3F62387FD22459CD04E86 /* TranscriptRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,35 +163,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5ED5CCAD820E045C3C07029A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78C447DD90F88748B58FF361 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EDA6D6223944636B9C5B54AA = {
+		01DF8015EE6D9F0C332DD0E1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5B04B2273026590A440D27C9 /* Assets.xcassets */,
-				7550037AC7F18DC7870DCF72 /* Auris-Debug.entitlements */,
-				DF7AE9F924D0E6FEE5C53529 /* Auris.entitlements */,
-				8BE67FC9CC92B8CA5E4A2090 /* AurisApp.swift */,
-				1507F021100E808DBE2FAA00 /* Info.plist */,
-				1D0D1BEDF1A3D6E5DD573FEF /* Localizable.xcstrings */,
-				2DC1C89DF0997540BB489831 /* AurisWidget */,
-				71386A41BF3705D552A88919 /* DesignSystem */,
-				C6D71DA7B22D387867F1A39F /* Features */,
-				01DF8015EE6D9F0C332DD0E1 /* Models */,
-				5B946EAFAAE425F193DB993E /* Services */,
-				DCE499C17AB8B56A85676C77 /* ViewModels */,
-				BFE00B156DCFC34C4751A6E5 /* Products */,
+				AFA0278F9F51BE3DBFBE76B4 /* Attachment.swift */,
+				A57F7B52DF931332AAC1D61C /* Meeting.swift */,
+				2997A437BF4EC5D4A67318EC /* Tag.swift */,
+				48BED3EA0899063EF3918AA7 /* TranscriptSegment.swift */,
 			);
+			path = Models;
 			sourceTree = "<group>";
 		};
-		BFE00B156DCFC34C4751A6E5 /* Products */ = {
+		06B00F2EBA66925A94CE0772 /* Recording */ = {
 			isa = PBXGroup;
 			children = (
-				4F5E0F02997B67B141C09824 /* Auris.app */,
-				16E753E2B59F1D242D278C57 /* AurisWidget.appex */,
+				0BB1C3BF0F0DDDA740C659DC /* AISuggestionsSheet.swift */,
+				4E9D62E575407E9C8395B71C /* ConsentSheet.swift */,
+				4A60A68A0849885CD92FB5F6 /* RecordingView.swift */,
 			);
-			name = Products;
+			path = Recording;
+			sourceTree = "<group>";
+		};
+		16F6B3714BCFDA08ACDF3C74 /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				7C90A64E3105C158AE81BC9F /* Cocoa.framework */,
+			);
+			name = "OS X";
 			sourceTree = "<group>";
 		};
 		2DC1C89DF0997540BB489831 /* AurisWidget */ = {
@@ -181,115 +211,7 @@
 				204D9EFEB6B7544C89D281C5 /* AurisWidget.swift */,
 				1A23D9697CE4D09E1806A018 /* Info.plist */,
 			);
-			path = "AurisWidget";
-			sourceTree = "<group>";
-		};
-		71386A41BF3705D552A88919 /* DesignSystem */ = {
-			isa = PBXGroup;
-			children = (
-				5C199489BA5F4EC535D3CB4C /* Components */,
-				0CD0E1B9EC28BC46833199B4 /* Theme.swift */,
-			);
-			path = "DesignSystem";
-			sourceTree = "<group>";
-		};
-		5C199489BA5F4EC535D3CB4C /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				F2EC534E45F546342F959D05 /* Chip.swift */,
-				212D0776BAD7EF01D78DD66E /* ControlButton.swift */,
-				57947725D155BFC37A2E4C7B /* SidebarItem.swift */,
-				8E4D937526EA647F8D4EEE36 /* StatusCard.swift */,
-				1EFD8CFDD656F55DD2D0B04A /* TitleBar.swift */,
-				FBC3F62387FD22459CD04E86 /* TranscriptRow.swift */,
-			);
-			path = "Components";
-			sourceTree = "<group>";
-		};
-		C6D71DA7B22D387867F1A39F /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				5CB11DDD3C164CE6211B0F1E /* Idle */,
-				E6D5D3DA7029623924C5038B /* Library */,
-				636CB5909A35AC07C36E8986 /* MenuBar */,
-				7BB6201BD7A7F80DEAA72438 /* Onboarding */,
-				06B00F2EBA66925A94CE0772 /* Recording */,
-				E2A2DD692A49157EA5468186 /* Settings */,
-				E81476DD88F2C6796927A653 /* Summary */,
-			);
-			path = "Features";
-			sourceTree = "<group>";
-		};
-		5CB11DDD3C164CE6211B0F1E /* Idle */ = {
-			isa = PBXGroup;
-			children = (
-				B9A3E7745F13D95BBCD13892 /* IdleView.swift */,
-			);
-			path = "Idle";
-			sourceTree = "<group>";
-		};
-		E6D5D3DA7029623924C5038B /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				D1A6ECD474F77F099D5106EA /* DeleteMeetingSheet.swift */,
-				00B4084D2753D27740E745C8 /* RootSplitView.swift */,
-				5D6EE59AD8C5E911B1D3CF71 /* SidebarView.swift */,
-			);
-			path = "Library";
-			sourceTree = "<group>";
-		};
-		636CB5909A35AC07C36E8986 /* MenuBar */ = {
-			isa = PBXGroup;
-			children = (
-				3E204FAE1A8CFD7BA5604DDD /* MenuBarView.swift */,
-			);
-			path = "MenuBar";
-			sourceTree = "<group>";
-		};
-		7BB6201BD7A7F80DEAA72438 /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				E6076E6DFBC6930AA670C8C9 /* OnboardingView.swift */,
-			);
-			path = "Onboarding";
-			sourceTree = "<group>";
-		};
-		06B00F2EBA66925A94CE0772 /* Recording */ = {
-			isa = PBXGroup;
-			children = (
-				0BB1C3BF0F0DDDA740C659DC /* AISuggestionsSheet.swift */,
-				4E9D62E575407E9C8395B71C /* ConsentSheet.swift */,
-				4A60A68A0849885CD92FB5F6 /* RecordingView.swift */,
-			);
-			path = "Recording";
-			sourceTree = "<group>";
-		};
-		E2A2DD692A49157EA5468186 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				5C4599AA9375712E54A80C71 /* SettingsView.swift */,
-			);
-			path = "Settings";
-			sourceTree = "<group>";
-		};
-		E81476DD88F2C6796927A653 /* Summary */ = {
-			isa = PBXGroup;
-			children = (
-				E7CE3E67E3E0B6A0737564AB /* DetailPanel.swift */,
-				16BBC406EB5DA4CD0197A0D8 /* SummaryView.swift */,
-			);
-			path = "Summary";
-			sourceTree = "<group>";
-		};
-		01DF8015EE6D9F0C332DD0E1 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				AFA0278F9F51BE3DBFBE76B4 /* Attachment.swift */,
-				A57F7B52DF931332AAC1D61C /* Meeting.swift */,
-				2997A437BF4EC5D4A67318EC /* Tag.swift */,
-				48BED3EA0899063EF3918AA7 /* TranscriptSegment.swift */,
-			);
-			path = "Models";
+			path = AurisWidget;
 			sourceTree = "<group>";
 		};
 		5B946EAFAAE425F193DB993E /* Services */ = {
@@ -306,7 +228,98 @@
 				EC72B020E410FED982BB02E5 /* UsageStore.swift */,
 				36F770060ABFE1BFF6C43838 /* WidgetSnapshot.swift */,
 			);
-			path = "Services";
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5C199489BA5F4EC535D3CB4C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				F2EC534E45F546342F959D05 /* Chip.swift */,
+				212D0776BAD7EF01D78DD66E /* ControlButton.swift */,
+				57947725D155BFC37A2E4C7B /* SidebarItem.swift */,
+				8E4D937526EA647F8D4EEE36 /* StatusCard.swift */,
+				1EFD8CFDD656F55DD2D0B04A /* TitleBar.swift */,
+				FBC3F62387FD22459CD04E86 /* TranscriptRow.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		5CB11DDD3C164CE6211B0F1E /* Idle */ = {
+			isa = PBXGroup;
+			children = (
+				B9A3E7745F13D95BBCD13892 /* IdleView.swift */,
+			);
+			path = Idle;
+			sourceTree = "<group>";
+		};
+		636CB5909A35AC07C36E8986 /* MenuBar */ = {
+			isa = PBXGroup;
+			children = (
+				3E204FAE1A8CFD7BA5604DDD /* MenuBarView.swift */,
+			);
+			path = MenuBar;
+			sourceTree = "<group>";
+		};
+		71386A41BF3705D552A88919 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				5C199489BA5F4EC535D3CB4C /* Components */,
+				0CD0E1B9EC28BC46833199B4 /* Theme.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		71C7D561258D074E900BA296 /* AurisTests */ = {
+			isa = PBXGroup;
+			children = (
+				76590EF5E01686F7D3C83D82 /* AppStateTests.swift */,
+				A9E11484433D25F0A73AB343 /* Mocks.swift */,
+				B70EA5485D09705F0FFBD676 /* PureLogicTests.swift */,
+				A40B5F0D3B54CE7CA6B59186 /* RecordingViewModelTests.swift */,
+				C45C0E987622A36D9B83CB64 /* SummarizationHeuristicTests.swift */,
+			);
+			name = AurisTests;
+			path = AurisTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		7BB6201BD7A7F80DEAA72438 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				E6076E6DFBC6930AA670C8C9 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		AA9FB16011A4E7499EDCF56C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				16F6B3714BCFDA08ACDF3C74 /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BFE00B156DCFC34C4751A6E5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4F5E0F02997B67B141C09824 /* Auris.app */,
+				16E753E2B59F1D242D278C57 /* AurisWidget.appex */,
+				EAAEAAADA4C3225096443F40 /* AurisTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6D71DA7B22D387867F1A39F /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				5CB11DDD3C164CE6211B0F1E /* Idle */,
+				E6D5D3DA7029623924C5038B /* Library */,
+				636CB5909A35AC07C36E8986 /* MenuBar */,
+				7BB6201BD7A7F80DEAA72438 /* Onboarding */,
+				06B00F2EBA66925A94CE0772 /* Recording */,
+				E2A2DD692A49157EA5468186 /* Settings */,
+				E81476DD88F2C6796927A653 /* Summary */,
+			);
+			path = Features;
 			sourceTree = "<group>";
 		};
 		DCE499C17AB8B56A85676C77 /* ViewModels */ = {
@@ -316,12 +329,78 @@
 				3211C66C79E88AE23B627C6B /* LibraryViewModel.swift */,
 				30A9D9FB3CA84319568CBB62 /* RecordingViewModel.swift */,
 			);
-			path = "ViewModels";
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E2A2DD692A49157EA5468186 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5C4599AA9375712E54A80C71 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		E6D5D3DA7029623924C5038B /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				D1A6ECD474F77F099D5106EA /* DeleteMeetingSheet.swift */,
+				00B4084D2753D27740E745C8 /* RootSplitView.swift */,
+				5D6EE59AD8C5E911B1D3CF71 /* SidebarView.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		E81476DD88F2C6796927A653 /* Summary */ = {
+			isa = PBXGroup;
+			children = (
+				E7CE3E67E3E0B6A0737564AB /* DetailPanel.swift */,
+				16BBC406EB5DA4CD0197A0D8 /* SummaryView.swift */,
+			);
+			path = Summary;
+			sourceTree = "<group>";
+		};
+		EDA6D6223944636B9C5B54AA = {
+			isa = PBXGroup;
+			children = (
+				5B04B2273026590A440D27C9 /* Assets.xcassets */,
+				7550037AC7F18DC7870DCF72 /* Auris-Debug.entitlements */,
+				DF7AE9F924D0E6FEE5C53529 /* Auris.entitlements */,
+				8BE67FC9CC92B8CA5E4A2090 /* AurisApp.swift */,
+				1507F021100E808DBE2FAA00 /* Info.plist */,
+				1D0D1BEDF1A3D6E5DD573FEF /* Localizable.xcstrings */,
+				2DC1C89DF0997540BB489831 /* AurisWidget */,
+				71386A41BF3705D552A88919 /* DesignSystem */,
+				C6D71DA7B22D387867F1A39F /* Features */,
+				01DF8015EE6D9F0C332DD0E1 /* Models */,
+				5B946EAFAAE425F193DB993E /* Services */,
+				DCE499C17AB8B56A85676C77 /* ViewModels */,
+				BFE00B156DCFC34C4751A6E5 /* Products */,
+				AA9FB16011A4E7499EDCF56C /* Frameworks */,
+				71C7D561258D074E900BA296 /* AurisTests */,
+			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0557409B9361D2336F20A296 /* AurisTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C89FC56802545AE5AE5DF7E6 /* Build configuration list for PBXNativeTarget "AurisTests" */;
+			buildPhases = (
+				28110B7E57EFE326000B5B73 /* Sources */,
+				5ED5CCAD820E045C3C07029A /* Frameworks */,
+				94D9DFD465CFC3C89B778BDA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA943086CD1FDA88D4E61746 /* PBXTargetDependency */,
+			);
+			name = AurisTests;
+			productName = AurisTests;
+			productReference = EAAEAAADA4C3225096443F40 /* AurisTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		16096466A0C94E7EBDCD0656 /* Auris */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 23746EFE221170E24101FE05 /* Build configuration list for PBXNativeTarget "Auris" */;
@@ -368,8 +447,12 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					16096466A0C94E7EBDCD0656 = {CreatedOnToolsVersion = 16.0; };
-					789A660F13B02BB5FF122671 = {CreatedOnToolsVersion = 16.0; };
+					16096466A0C94E7EBDCD0656 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					789A660F13B02BB5FF122671 = {
+						CreatedOnToolsVersion = 16.0;
+					};
 				};
 			};
 			buildConfigurationList = B0D3B7D22269663DD77FCD84 /* Build configuration list for PBXProject "Auris" */;
@@ -389,6 +472,7 @@
 			targets = (
 				16096466A0C94E7EBDCD0656 /* Auris */,
 				789A660F13B02BB5FF122671 /* AurisWidget */,
+				0557409B9361D2336F20A296 /* AurisTests */,
 			);
 		};
 /* End PBXProject section */
@@ -410,9 +494,39 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		94D9DFD465CFC3C89B778BDA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		11176E48486D0B5EBE018FEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F69B890EA671E93C5639476 /* AurisWidget.swift in Sources */,
+				6BAC5FC6194E75421541FD07 /* Theme.swift in Sources */,
+				8EE85A9A707552E1334343D8 /* AppGroup.swift in Sources */,
+				6EE681427DB7D8B1B6EA7526 /* WidgetSnapshot.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28110B7E57EFE326000B5B73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61233FB187662048E27ED1E2 /* AppStateTests.swift in Sources */,
+				87E850326D624536E83DFC45 /* Mocks.swift in Sources */,
+				BC02FAAB8A1CB73E4DAE2615 /* PureLogicTests.swift in Sources */,
+				6C73AC71638141460ABB6912 /* RecordingViewModelTests.swift in Sources */,
+				DC00E19EBC1C542890B93258 /* SummarizationHeuristicTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EC6D9E6268A1DE72A5C6080 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -457,20 +571,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		11176E48486D0B5EBE018FEC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9F69B890EA671E93C5639476 /* AurisWidget.swift in Sources */,
-				6BAC5FC6194E75421541FD07 /* Theme.swift in Sources */,
-				8EE85A9A707552E1334343D8 /* AppGroup.swift in Sources */,
-				6EE681427DB7D8B1B6EA7526 /* WidgetSnapshot.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CA943086CD1FDA88D4E61746 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Auris;
+			target = 16096466A0C94E7EBDCD0656 /* Auris */;
+			targetProxy = 42219D0007BE52B1C2CACB9F /* PBXContainerItemProxy */;
+		};
 		DD93A878C708525D13DF0232 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 789A660F13B02BB5FF122671 /* AurisWidget */;
@@ -479,53 +588,18 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		51EA85164D3D491DE58D80BC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
-				CLANG_ENABLE_MODULES = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				SDKROOT = macosx;
-				SWIFT_VERSION = 6.0;
-				SWIFT_STRICT_CONCURRENCY = complete;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				ONLY_ACTIVE_ARCH = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-			};
-			name = Debug;
-		};
-		8BD411BB9399D65A298DF7EA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
-				CLANG_ENABLE_MODULES = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				SDKROOT = macosx;
-				SWIFT_VERSION = 6.0;
-				SWIFT_STRICT_CONCURRENCY = complete;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_COMPILATION_MODE = wholemodule;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-			};
-			name = Release;
-		};
 		296606123BC51EF2B3893761 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Auris-Debug.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5WQ3XSS9MT;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5WQ3XSS9MT;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -537,7 +611,123 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bazzi.auris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				CODE_SIGN_ENTITLEMENTS = "Auris-Debug.entitlements";
+			};
+			name = Debug;
+		};
+		51EA85164D3D491DE58D80BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		621126193A17D245A66D9D22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "AurisWidget/AurisWidget-Debug.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5WQ3XSS9MT;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AurisWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bazzi.auris.AurisWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		691C620FA5A998553FD0BDC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = AurisWidget/AurisWidget.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5WQ3XSS9MT;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AurisWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bazzi.auris.AurisWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		8BD411BB9399D65A298DF7EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		A34DD730D112CFEA99FF97B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGNING_ALLOWED = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bazzi.auris.AurisTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Auris.app/Contents/MacOS/Auris";
+			};
+			name = Release;
+		};
+		A36115CD2B61030B366D22E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGNING_ALLOWED = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bazzi.auris.AurisTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Auris.app/Contents/MacOS/Auris";
 			};
 			name = Debug;
 		};
@@ -545,11 +735,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Auris.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5WQ3XSS9MT;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5WQ3XSS9MT;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Info.plist;
@@ -562,68 +753,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bazzi.auris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				CODE_SIGN_ENTITLEMENTS = Auris.entitlements;
-			};
-			name = Release;
-		};
-		621126193A17D245A66D9D22 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5WQ3XSS9MT;
-				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "AurisWidget/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../../../../Frameworks",
-				);
-				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bazzi.auris.AurisWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				CODE_SIGN_ENTITLEMENTS = "AurisWidget/AurisWidget-Debug.entitlements";
-			};
-			name = Debug;
-		};
-		691C620FA5A998553FD0BDC0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5WQ3XSS9MT;
-				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "AurisWidget/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../../../../Frameworks",
-				);
-				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bazzi.auris.AurisWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				CODE_SIGN_ENTITLEMENTS = "AurisWidget/AurisWidget.entitlements";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B0D3B7D22269663DD77FCD84 /* Build configuration list for PBXProject "Auris" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				51EA85164D3D491DE58D80BC /* Debug */,
-				8BD411BB9399D65A298DF7EA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		23746EFE221170E24101FE05 /* Build configuration list for PBXNativeTarget "Auris" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -638,6 +773,24 @@
 			buildConfigurations = (
 				621126193A17D245A66D9D22 /* Debug */,
 				691C620FA5A998553FD0BDC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0D3B7D22269663DD77FCD84 /* Build configuration list for PBXProject "Auris" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51EA85164D3D491DE58D80BC /* Debug */,
+				8BD411BB9399D65A298DF7EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C89FC56802545AE5AE5DF7E6 /* Build configuration list for PBXNativeTarget "AurisTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A34DD730D112CFEA99FF97B2 /* Release */,
+				A36115CD2B61030B366D22E8 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
