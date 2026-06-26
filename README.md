@@ -7,7 +7,7 @@
 Auris listens to your microphone and system audio, transcribes the conversation on-device with macOS's native speech engine, and turns it into a clean, GPT-powered summary with action items. Bring your own OpenAI key. Open source.
 
 [![Platform](https://img.shields.io/badge/platform-macOS%2026%2B-blue)](https://www.apple.com/macos/)
-[![Swift](https://img.shields.io/badge/Swift-6.3-orange)](https://swift.org)
+[![Swift](https://img.shields.io/badge/Swift-5.0-orange)](https://swift.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](#contributing)
 
@@ -28,8 +28,8 @@ Most meeting-notes tools upload your audio to the cloud. Auris keeps the heavy l
 - 🎧 **Dual capture** — records the microphone and system audio (Zoom, Meet, Teams) into a single track.
 - 📝 **On-device transcription** — powered by Apple's native Speech framework. No audio leaves your Mac.
 - 🌍 **Multi-language** — transcribe in any locale Apple supports; get summaries in the language you choose.
-- 🗣️ **Speaker labels** — name who's speaking and reuse the label throughout the transcript.
-- ✨ **GPT summaries** — executive summary, key topics, decisions, and action items, generated with your OpenAI key.
+- 🗣️ **Speaker labels** — your mic and the system audio are labeled separately (you vs. guests); set your own display name in Settings.
+- ✨ **GPT summaries** — executive summary, key topics, decisions, and action items, generated with your OpenAI key. Didn't generate (key error, offline)? Open the meeting and hit **Generate summary** to create it on demand.
 - 🖼️ **Attachments** — drop screenshots or images into the conversation; they're sent along as context for the summary.
 - 🔊 **Replayable audio** — every meeting is saved, so you can listen back with a synced player.
 - 🏷️ **Tags & colors** — organize and filter your meeting library by colored tags.
@@ -46,7 +46,7 @@ Most meeting-notes tools upload your audio to the cloud. Auris keeps the heavy l
 
 ## Requirements
 
-- macOS 14 (Sonoma) or later
+- macOS 26 or later
 - An OpenAI API key (for summaries)
 - Permissions: **Microphone** + **Screen Recording** (the latter is required to capture system audio)
 
@@ -66,7 +66,7 @@ cd auris
 open Auris.xcodeproj
 ```
 
-Build & run with Xcode 16+ (macOS 14+ deployment target). On first launch, set your signing
+Build & run with Xcode 26+ (macOS 26 deployment target). On first launch, set your signing
 team in **Signing & Capabilities** if codesigning fails. The UI is localized in **English,
 Portuguese (BR), and Spanish** — it follows your system language, with an override in Settings.
 
@@ -82,6 +82,7 @@ Portuguese (BR), and Spanish** — it follows your system language, with an over
 - **Pause** or **Stop** at any time — from the window, the menu-bar popover, or a widget.
 - Attach a screenshot mid-meeting to give the summary extra context.
 - When you stop, Auris transcribes the audio and generates the summary automatically.
+- If the summary didn't generate (e.g. an OpenAI key error), open the meeting and tap **Generate summary** to create it later.
 - Rename, tag, and color your meetings; filter the library by tag.
 
 ## Privacy & consent
@@ -94,7 +95,7 @@ Portuguese (BR), and Spanish** — it follows your system language, with an over
 
 - [x] Core loop: capture → transcribe → summarize
 - [x] Audio recording & playback
-- [x] Manual speaker labeling
+- [x] Two-stream speaker labels (you vs. guests)
 - [x] Image attachments as summary context
 - [x] Tags, colors & filtering
 - [x] WidgetKit widgets + menu-bar indicator
@@ -106,7 +107,7 @@ Portuguese (BR), and Spanish** — it follows your system language, with an over
 - [ ] Export (Markdown, PDF, `.srt`/`.vtt`)
 - [ ] Integrations (Notion, Slack, …)
 
-> **Note on diarization:** Apple's native speech engine transcribes but does **not** separate speakers. The MVP ships with _manual_ speaker labeling; automatic diarization is on the roadmap.
+> **Note on diarization:** Apple's native speech engine transcribes but does **not** separate speakers. Auris labels speech by **audio source** — your microphone (you) vs. the system audio (guests) — rather than by individual voice. True per-speaker diarization is on the roadmap.
 
 ## Tech stack
 
