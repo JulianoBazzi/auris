@@ -13,6 +13,9 @@ final class AppState {
     var route: AppRoute
     var selectedMeetingID: UUID?
     var showDetailPanel: Bool = true
+    /// True while a recording is active (recording or paused). Drives the menu-bar indicator.
+    /// In-memory only; mirrored from the RecordingViewModel's phase.
+    var isRecording: Bool = false
 
     var transcriptionLocale: String {
         didSet { defaults.set(transcriptionLocale, forKey: Keys.transcriptionLocale) }
@@ -61,7 +64,7 @@ final class AppState {
         summaryLanguage = defaults.string(forKey: Keys.summaryLanguage) ?? "en"
         interfaceLanguage = defaults.string(forKey: Keys.interfaceLanguage) ?? ""
         summaryModel = defaults.string(forKey: Keys.summaryModel) ?? "gpt-4o"
-        userDisplayName = defaults.string(forKey: Keys.userDisplayName) ?? String(localized: "Me")
+        userDisplayName = defaults.string(forKey: Keys.userDisplayName) ?? ""
         transcribeSystemAudio = defaults.object(forKey: Keys.transcribeSystemAudio) as? Bool ?? true
         playNotice = defaults.object(forKey: Keys.playNotice) as? Bool ?? true
         hasOpenAIKey = KeychainStore.hasKey
@@ -69,6 +72,18 @@ final class AppState {
 
     var localeOverride: Locale? {
         interfaceLanguage.isEmpty ? nil : Locale(identifier: interfaceLanguage)
+    }
+
+    /// Localizes a catalog key using the app's selected interface language (not the system
+    /// language). `String(localized:)` follows the system locale, so labels created outside of
+    /// SwiftUI `Text` (e.g. transcript speaker names) need this to match the displayed UI language.
+    func localizedUI(_ key: String) -> String {
+        if !interfaceLanguage.isEmpty,
+           let path = Bundle.main.path(forResource: interfaceLanguage, ofType: "lproj"),
+           let bundle = Bundle(path: path) {
+            return bundle.localizedString(forKey: key, value: key, table: nil)
+        }
+        return Bundle.main.localizedString(forKey: key, value: key, table: nil)
     }
 
     func completeOnboarding() {

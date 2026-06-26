@@ -24,8 +24,6 @@ final class Meeting {
 
     @Relationship(deleteRule: .cascade, inverse: \TranscriptSegment.meeting)
     var segments: [TranscriptSegment]
-    @Relationship(deleteRule: .cascade, inverse: \Speaker.meeting)
-    var speakers: [Speaker]
     @Relationship(deleteRule: .cascade, inverse: \Attachment.meeting)
     var attachments: [Attachment]
     @Relationship(deleteRule: .nullify)
@@ -56,7 +54,6 @@ final class Meeting {
         self.actionItems = actionItems
         self.colorHex = colorHex
         self.segments = []
-        self.speakers = []
         self.attachments = []
         self.tags = []
     }

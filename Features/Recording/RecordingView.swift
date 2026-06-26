@@ -10,7 +10,6 @@ struct RecordingView: View {
     var onFinish: (Meeting?) -> Void
 
     @State private var title: String = ""
-    @State private var showSpeakerSheet = false
     @State private var showImporter = false
 
     var body: some View {
@@ -21,13 +20,6 @@ struct RecordingView: View {
             controlBar
         }
         .background(AurisColor.bgPanel)
-        .sheet(isPresented: $showSpeakerSheet) {
-            SpeakerNamingSheet { name in
-                showSpeakerSheet = false
-                if let name { recorder.addParticipant(name) }
-            }
-            .environment(\.locale, appState.localeOverride ?? Locale.current)
-        }
         .sheet(isPresented: suggestionBinding) {
             if let suggestion = recorder.suggestion, let meeting = recorder.pendingMeeting {
                 AISuggestionsSheet(
@@ -50,6 +42,13 @@ struct RecordingView: View {
             if recorder.downloadingModel { downloadingOverlay }
             else if recorder.phase == .summarizing { summarizingOverlay }
             else if recorder.summaryFailed { summaryFailedOverlay }
+        }
+        .onChange(of: recorder.stopRequested) { _, requested in
+            // Triggered by the menu-bar "Stop" button; run the same finish flow as the window button.
+            if requested, recorder.phase == .recording || recorder.phase == .paused {
+                recorder.stopRequested = false
+                finish()
+            }
         }
     }
 
@@ -130,21 +129,6 @@ struct RecordingView: View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 22) {
-                    if !recorder.participants.isEmpty {
-                        HStack(spacing: 8) {
-                            ForEach(recorder.participants, id: \.self) { p in
-                                Chip(label: p)
-                            }
-                            Button { showSpeakerSheet = true } label: {
-                                Image(systemName: "plus")
-                                    .font(.system(size: 11, weight: .semibold))
-                                    .foregroundStyle(AurisColor.textSecondary)
-                                    .padding(7)
-                                    .background(AurisColor.bgElevated, in: Circle())
-                            }
-                            .buttonStyle(.plain)
-                        }
-                    }
                     ForEach(recorder.timeline) { item in
                         TranscriptRow(
                             speakerName: item.speakerName,
@@ -193,9 +177,6 @@ struct RecordingView: View {
             WaveformView(level: recorder.level)
                 .frame(height: 24)
                 .frame(maxWidth: .infinity)
-            Button { showSpeakerSheet = true } label: {
-                controlLabel("person.badge.plus", "Identify speaker")
-            }.buttonStyle(.plain)
             Button { showImporter = true } label: {
                 controlLabel("paperclip", "Attach")
             }.buttonStyle(.plain)

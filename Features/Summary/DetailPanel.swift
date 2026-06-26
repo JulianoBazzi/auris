@@ -41,9 +41,7 @@ struct DetailPanel: View {
     }
 
     private var participantNames: [String] {
-        let fromSpeakers = meeting.speakers.map(\.name)
-        let fromSegments = Set(meeting.segments.map(\.speakerName))
-        return fromSpeakers.isEmpty ? Array(fromSegments).sorted() : fromSpeakers
+        Array(Set(meeting.segments.map(\.speakerName))).sorted()
     }
 
     private var aiCard: some View {

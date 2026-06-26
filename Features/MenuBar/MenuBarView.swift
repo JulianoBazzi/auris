@@ -4,6 +4,7 @@ import SwiftData
 /// Menu-bar popover: quick status + start/open shortcuts. (.pen roadmap: menu-bar indicator)
 struct MenuBarView: View {
     @Environment(AppState.self) private var appState
+    @Environment(RecordingViewModel.self) private var recorder
     @Environment(\.openWindow) private var openWindow
     @Query(sort: \Meeting.createdAt, order: .reverse) private var meetings: [Meeting]
 
@@ -21,17 +22,59 @@ struct MenuBarView: View {
                 }
             }
 
-            Button {
-                appState.selectedMeetingID = nil
-                NSApp.activate(ignoringOtherApps: true)
-            } label: {
-                HStack(spacing: 8) {
-                    Image(systemName: "record.circle").font(.system(size: 13))
-                    Text("New meeting")
+            if appState.isRecording {
+                HStack(spacing: 7) {
+                    Circle().fill(recorder.phase == .paused ? AurisColor.warn : AurisColor.danger)
+                        .frame(width: 8, height: 8)
+                    Text(recorder.phase == .paused ? "Paused" : "Recording")
+                        .font(AurisFont.ui(12, .semibold))
+                        .foregroundStyle(recorder.phase == .paused ? AurisColor.warn : AurisColor.danger)
                     Spacer()
                 }
+                .padding(.vertical, 7).padding(.horizontal, 10)
+                .background((recorder.phase == .paused ? AurisColor.warn : AurisColor.danger).opacity(0.12),
+                            in: RoundedRectangle(cornerRadius: 8))
+
+                HStack(spacing: 8) {
+                    Button {
+                        if recorder.phase == .paused { recorder.resume() } else { recorder.pause() }
+                    } label: {
+                        HStack(spacing: 6) {
+                            Image(systemName: recorder.phase == .paused ? "play.fill" : "pause.fill")
+                                .font(.system(size: 11))
+                            Text(recorder.phase == .paused ? "Resume" : "Pause")
+                            Spacer()
+                        }
+                    }
+                    .buttonStyle(GradientButtonStyle(verticalPadding: 8))
+
+                    Button {
+                        recorder.stopRequested = true
+                        NSApp.activate(ignoringOtherApps: true)
+                    } label: {
+                        HStack(spacing: 6) {
+                            Image(systemName: "stop.fill").font(.system(size: 11))
+                            Text("Stop")
+                        }
+                        .foregroundStyle(.white)
+                        .padding(.vertical, 8).padding(.horizontal, 14)
+                        .background(AurisColor.danger, in: Capsule())
+                    }
+                    .buttonStyle(.plain)
+                }
+            } else {
+                Button {
+                    appState.selectedMeetingID = nil
+                    NSApp.activate(ignoringOtherApps: true)
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "record.circle").font(.system(size: 13))
+                        Text("New meeting")
+                        Spacer()
+                    }
+                }
+                .buttonStyle(GradientButtonStyle(verticalPadding: 9))
             }
-            .buttonStyle(GradientButtonStyle(verticalPadding: 9))
 
             if !meetings.isEmpty {
                 Divider().overlay(AurisColor.borderSubtle)

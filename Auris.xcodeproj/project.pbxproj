@@ -23,13 +23,11 @@
 		4B6D9AA26C9DC6FC8123F04C /* AISuggestionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB1C3BF0F0DDDA740C659DC /* AISuggestionsSheet.swift */; };
 		15214DD7AA827EFF9AA10A0C /* ConsentSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9D62E575407E9C8395B71C /* ConsentSheet.swift */; };
 		84B2C53F99550F3D0BF4AF56 /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A60A68A0849885CD92FB5F6 /* RecordingView.swift */; };
-		8CE077AFC7FCED38DC037458 /* SpeakerNamingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD46358D8FD91924AF431F /* SpeakerNamingSheet.swift */; };
 		A08E65DEE8501616FDB8018F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4599AA9375712E54A80C71 /* SettingsView.swift */; };
 		17F96F452BBB744876B72B6D /* DetailPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE3E67E3E0B6A0737564AB /* DetailPanel.swift */; };
 		A794F233493162D1BE2616A7 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BBC406EB5DA4CD0197A0D8 /* SummaryView.swift */; };
 		6EB019414FC1882B2D77A5D8 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0278F9F51BE3DBFBE76B4 /* Attachment.swift */; };
 		5EC25310B2A9C1CB7DD32F4C /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F7B52DF931332AAC1D61C /* Meeting.swift */; };
-		921E527D1C9C1A13D02B1B2E /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D883F8DE8C130E39B477E50 /* Speaker.swift */; };
 		B30AE8786F36EEE2D6B8EBBA /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2997A437BF4EC5D4A67318EC /* Tag.swift */; };
 		8E549648A381F9955A46E54B /* TranscriptSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BED3EA0899063EF3918AA7 /* TranscriptSegment.swift */; };
 		D541351A686BDC08DB43528C /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A653FA3E8BFDCC73AA92AA85 /* AppGroup.swift */; };
@@ -99,13 +97,11 @@
 		0BB1C3BF0F0DDDA740C659DC /* AISuggestionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AISuggestionsSheet.swift"; sourceTree = "<group>"; };
 		4E9D62E575407E9C8395B71C /* ConsentSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConsentSheet.swift"; sourceTree = "<group>"; };
 		4A60A68A0849885CD92FB5F6 /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordingView.swift"; sourceTree = "<group>"; };
-		37FD46358D8FD91924AF431F /* SpeakerNamingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpeakerNamingSheet.swift"; sourceTree = "<group>"; };
 		5C4599AA9375712E54A80C71 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView.swift"; sourceTree = "<group>"; };
 		E7CE3E67E3E0B6A0737564AB /* DetailPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailPanel.swift"; sourceTree = "<group>"; };
 		16BBC406EB5DA4CD0197A0D8 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SummaryView.swift"; sourceTree = "<group>"; };
 		AFA0278F9F51BE3DBFBE76B4 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Attachment.swift"; sourceTree = "<group>"; };
 		A57F7B52DF931332AAC1D61C /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meeting.swift"; sourceTree = "<group>"; };
-		0D883F8DE8C130E39B477E50 /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Speaker.swift"; sourceTree = "<group>"; };
 		2997A437BF4EC5D4A67318EC /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag.swift"; sourceTree = "<group>"; };
 		48BED3EA0899063EF3918AA7 /* TranscriptSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TranscriptSegment.swift"; sourceTree = "<group>"; };
 		A653FA3E8BFDCC73AA92AA85 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppGroup.swift"; sourceTree = "<group>"; };
@@ -264,7 +260,6 @@
 				0BB1C3BF0F0DDDA740C659DC /* AISuggestionsSheet.swift */,
 				4E9D62E575407E9C8395B71C /* ConsentSheet.swift */,
 				4A60A68A0849885CD92FB5F6 /* RecordingView.swift */,
-				37FD46358D8FD91924AF431F /* SpeakerNamingSheet.swift */,
 			);
 			path = "Recording";
 			sourceTree = "<group>";
@@ -291,7 +286,6 @@
 			children = (
 				AFA0278F9F51BE3DBFBE76B4 /* Attachment.swift */,
 				A57F7B52DF931332AAC1D61C /* Meeting.swift */,
-				0D883F8DE8C130E39B477E50 /* Speaker.swift */,
 				2997A437BF4EC5D4A67318EC /* Tag.swift */,
 				48BED3EA0899063EF3918AA7 /* TranscriptSegment.swift */,
 			);
@@ -440,13 +434,11 @@
 				4B6D9AA26C9DC6FC8123F04C /* AISuggestionsSheet.swift in Sources */,
 				15214DD7AA827EFF9AA10A0C /* ConsentSheet.swift in Sources */,
 				84B2C53F99550F3D0BF4AF56 /* RecordingView.swift in Sources */,
-				8CE077AFC7FCED38DC037458 /* SpeakerNamingSheet.swift in Sources */,
 				A08E65DEE8501616FDB8018F /* SettingsView.swift in Sources */,
 				17F96F452BBB744876B72B6D /* DetailPanel.swift in Sources */,
 				A794F233493162D1BE2616A7 /* SummaryView.swift in Sources */,
 				6EB019414FC1882B2D77A5D8 /* Attachment.swift in Sources */,
 				5EC25310B2A9C1CB7DD32F4C /* Meeting.swift in Sources */,
-				921E527D1C9C1A13D02B1B2E /* Speaker.swift in Sources */,
 				B30AE8786F36EEE2D6B8EBBA /* Tag.swift in Sources */,
 				8E549648A381F9955A46E54B /* TranscriptSegment.swift in Sources */,
 				D541351A686BDC08DB43528C /* AppGroup.swift in Sources */,

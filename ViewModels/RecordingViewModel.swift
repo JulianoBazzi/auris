@@ -36,7 +36,6 @@ final class RecordingViewModel {
     var liveMic: LiveTurn?
     var liveSystem: LiveTurn?
     var segments: [TranscriptSegment] = []
-    var participants: [String] = []
     var pendingImages: [Data] = []
     var errorMessage: String?
 
@@ -57,8 +56,14 @@ final class RecordingViewModel {
     var captureSystem = true
     /// Display name used to label the user's own (microphone) speech. Set from settings before start.
     var selfSpeakerName: String = ""
+    /// Localized fallback label for the user (when `selfSpeakerName` is empty) and for the remote
+    /// participant. Injected from the view so they follow the app's interface language.
+    var meName: String = "Me"
+    var guestName: String = "Guest"
     /// Whether to transcribe system audio as a second stream. Set from settings before start.
     var transcribeSystem = true
+    /// Set true (e.g. from the menu bar "Stop" button) to ask the recording UI to finish.
+    var stopRequested = false
 
     private let audio: AudioCapturing
     private let transcriber: Transcribing
@@ -82,7 +87,7 @@ final class RecordingViewModel {
     }
 
     var micSpeaker: String {
-        selfSpeakerName.isEmpty ? String(localized: "Me") : selfSpeakerName
+        selfSpeakerName.isEmpty ? meName : selfSpeakerName
     }
 
     /// Committed segments + the live partials, merged in chronological order (a real conversation).
@@ -209,13 +214,13 @@ final class RecordingViewModel {
             if !seg.text.isEmpty {
                 insertSegment(TranscriptSegment(
                     startTime: seg.startTime, text: seg.text,
-                    speakerName: String(localized: "Guest"), speakerColorHex: "#B07CF6"
+                    speakerName: guestName, speakerColorHex: "#B07CF6"
                 ))
             }
             liveSystem = nil
         } else {
             liveSystem = LiveTurn(id: "live-system", startTime: seg.startTime, text: seg.text,
-                                  speakerName: String(localized: "Guest"), colorHex: "#B07CF6")
+                                  speakerName: guestName, colorHex: "#B07CF6")
         }
     }
 
@@ -235,10 +240,6 @@ final class RecordingViewModel {
     }
 
     func attach(_ data: Data) { pendingImages.append(data) }
-
-    func addParticipant(_ name: String) {
-        if !name.isEmpty, !participants.contains(name) { participants.append(name) }
-    }
 
     // MARK: - Stop → persist → suggest → summarize
 
@@ -261,7 +262,7 @@ final class RecordingViewModel {
         }
         if let turn = liveSystem, !turn.text.isEmpty {
             insertSegment(TranscriptSegment(startTime: turn.startTime, text: turn.text,
-                                            speakerName: String(localized: "Guest"), speakerColorHex: "#B07CF6"))
+                                            speakerName: guestName, speakerColorHex: "#B07CF6"))
             liveSystem = nil
         }
         segments.sort { $0.startTime < $1.startTime }
@@ -353,9 +354,10 @@ final class RecordingViewModel {
     func reset() {
         phase = .idle
         elapsed = 0; level = 0; liveMic = nil; liveSystem = nil
-        segments = []; participants = []; pendingImages = []
+        segments = []; pendingImages = []
         errorMessage = nil; summaryFailed = false; systemCaptureDenied = false
         suggestion = nil; pendingMeeting = nil
+        stopRequested = false
     }
 
     private func startTimer() {

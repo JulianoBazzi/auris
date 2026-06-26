@@ -4,10 +4,10 @@ import SwiftData
 /// Three-pane shell: custom title bar over [sidebar | main | detail panel].
 struct RootSplitView: View {
     @Environment(AppState.self) private var appState
+    @Environment(RecordingViewModel.self) private var recorder
     @Environment(\.modelContext) private var context
     @Query(sort: \Meeting.createdAt, order: .reverse) private var meetings: [Meeting]
 
-    @State private var recorder = RecordingViewModel()
     @State private var library = LibraryViewModel()
     @State private var showConsent = false
     @State private var showSettings = false
@@ -17,9 +17,9 @@ struct RootSplitView: View {
         meetings.first { $0.id == appState.selectedMeetingID }
     }
 
-    var body: some View {
+    private var shell: some View {
         @Bindable var appState = appState
-        VStack(spacing: 0) {
+        return VStack(spacing: 0) {
             TitleBar(showDetailPanel: $appState.showDetailPanel)
             HStack(spacing: 0) {
                 SidebarView(
@@ -41,12 +41,22 @@ struct RootSplitView: View {
                 }
             }
         }
+        .onChange(of: recorder.phase) { _, p in
+            appState.isRecording = (p == .recording || p == .paused)
+        }
+    }
+
+    var body: some View {
+        @Bindable var appState = appState
+        shell
         .background(AurisColor.bgWindow)
         .sheet(isPresented: $showConsent) {
             ConsentSheet(playNoticeDefault: appState.playNotice) { proceed in
                 showConsent = false
                 if proceed {
                     recorder.selfSpeakerName = appState.userDisplayName
+                    recorder.meName = appState.localizedUI("Me")
+                    recorder.guestName = appState.localizedUI("Guest")
                     recorder.transcribeSystem = appState.transcribeSystemAudio
                     Task { await recorder.start(locale: appState.transcriptionLocale) }
                 }
